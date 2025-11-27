@@ -83,7 +83,7 @@ En executar l’script, es mostra un resum detallat:
 
 ● Resum final d’errors i encerts.
 
-## 📝 Autor
+## Autor
 
 
 **[Oriol Tutusaus - 267664]**
