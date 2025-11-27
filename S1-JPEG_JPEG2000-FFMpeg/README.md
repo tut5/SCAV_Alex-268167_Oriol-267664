@@ -91,8 +91,3 @@ En executar l’script, es mostra un resum detallat:
 **[Alex Alastuey - 268167]**
 
 SCAV – Seminari 1
-
-
-
-This is a offline tool, your data stays locally and is not send to any server!
-Feedback & Bug Reports
