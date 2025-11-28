@@ -1,5 +1,3 @@
-PS I:\codificacio_video\S1-JPEG_JPEG2000-FFMpeg> python first_seminar.py
-
 ============================================================
  EXERCICI 9: Unit tests automàtics - Primer Seminari
 ============================================================
@@ -17,331 +15,341 @@ test_yuv_to_rgb_roundtrip (__main__.TestColorTranslator.test_yuv_to_rgb_roundtri
 test_compress_bw_real (__main__.TestImageEncoder.test_compress_bw_real) ...
 [Prova] Compressió B/N...
 Executant compressió i conversió a blanc i negre...
-ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+ffmpeg version 8.0.git Copyright (c) 2000-2025 the FFmpeg developers
   built with gcc 15.2.0 (Rev8, Built by MSYS2 project)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-libshaderc --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
-  libavutil      60.  8.100 / 60.  8.100
-  libavcodec     62. 11.100 / 62. 11.100
-  libavformat    62.  3.100 / 62.  3.100
-  libavdevice    62.  1.100 / 62.  1.100
-  libavfilter    11.  4.100 / 11.  4.100
-  libswscale      9.  1.100 /  9.  1.100
-  libswresample   6.  1.100 /  6.  1.100
+  configuration:
+  libavutil      60. 18.100 / 60. 18.100
+  libavcodec     62. 19.100 / 62. 19.100
+  libavformat    62.  6.103 / 62.  6.103
+  libavdevice    62.  2.100 / 62.  2.100
+  libavfilter    11.  9.100 / 11.  9.100
+  libswscale      9.  3.100 /  9.  3.100
+  libswresample   6.  2.100 /  6.  2.100
 Input #0, image2, from 'test_image.jpg':
   Duration: 00:00:00.04, start: 0.000000, bitrate: 84217 kb/s
   Stream #0:0: Video: mjpeg (Progressive), yuvj444p(pc, bt470bg/unknown/unknown), 3000x1680, 25 fps, 25 tbr, 25 tbn
 Stream mapping:
   Stream #0:0 -> #0:0 (mjpeg (native) -> mjpeg (native))
 Press [q] to stop, [?] for help
-[swscaler @ 000001b129673f00] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 000001b1297bae80] deprecated pixel format used, make sure you did set range correctly
-Output #0, image2, to 'test_outputs\test_image_bw_compressed.jpg':
+[swscaler @ 000002190ddf4140] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 000002190df060c0] deprecated pixel format used, make sure you did set range correctly
+Output #0, image2, to 'test_outputs/test_image_bw_compressed.jpg':
   Metadata:
-    encoder         : Lavf62.3.100
+    encoder         : Lavf62.6.103
   Stream #0:0: Video: mjpeg, yuvj444p(pc, bt470bg/unknown/unknown, progressive), 3000x1680, q=2-31, 200 kb/s, 25 fps, 25 tbn
     Metadata:
-      encoder         : Lavc62.11.100 mjpeg
+      encoder         : Lavc62.19.100 mjpeg
     Side data:
-      ICC Profile
-      cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[image2 @ 000001b129715c00] The specified filename 'test_outputs\test_image_bw_compressed.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 000001b129715c00] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
-[out#0/image2 @ 000001b129715b00] video:93KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
-frame=    1 fps=0.0 q=31.0 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.866x elapsed=0:00:00.04
+      ICC Profile: (3556 bytes)
+      EXIF metadata: (197 bytes)
+      CPB properties: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+[image2 @ 000002190de3eb00] The specified filename 'test_outputs/test_image_bw_compressed.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 000002190de3eb00] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[out#0/image2 @ 000002190dd68280] video:93KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=    1 fps=0.0 q=31.0 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.347x elapsed=0:00:00.11
 Executant compressió i conversió a blanc i negre...
-ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+ffmpeg version 8.0.git Copyright (c) 2000-2025 the FFmpeg developers
   built with gcc 15.2.0 (Rev8, Built by MSYS2 project)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-libshaderc --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
-  libavutil      60.  8.100 / 60.  8.100
-  libavcodec     62. 11.100 / 62. 11.100
-  libavformat    62.  3.100 / 62.  3.100
-  libavdevice    62.  1.100 / 62.  1.100
-  libavfilter    11.  4.100 / 11.  4.100
-  libswscale      9.  1.100 /  9.  1.100
-  libswresample   6.  1.100 /  6.  1.100
+  configuration:
+  libavutil      60. 18.100 / 60. 18.100
+  libavcodec     62. 19.100 / 62. 19.100
+  libavformat    62.  6.103 / 62.  6.103
+  libavdevice    62.  2.100 / 62.  2.100
+  libavfilter    11.  9.100 / 11.  9.100
+  libswscale      9.  3.100 /  9.  3.100
+  libswresample   6.  2.100 /  6.  2.100
 Input #0, image2, from 'test_image2.jpg':
   Duration: 00:00:00.04, start: 0.000000, bitrate: 1098443 kb/s
   Stream #0:0: Video: mjpeg (Baseline), yuvj422p(pc, bt470bg/unknown/unknown), 6000x4000, 25 fps, 25 tbr, 25 tbn
 Stream mapping:
   Stream #0:0 -> #0:0 (mjpeg (native) -> mjpeg (native))
 Press [q] to stop, [?] for help
-[swscaler @ 000001dab1342240] deprecated pixel format used, make sure you did set range correctly
-[swscaler @ 000001dab17cb000] deprecated pixel format used, make sure you did set range correctly
-Output #0, image2, to 'test_outputs\test_image2_bw_compressed.jpg':
+[swscaler @ 00000210ebe1e740] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 00000210ec078b00] deprecated pixel format used, make sure you did set range correctly
+Output #0, image2, to 'test_outputs/test_image2_bw_compressed.jpg':
   Metadata:
-    encoder         : Lavf62.3.100
+    encoder         : Lavf62.6.103
   Stream #0:0: Video: mjpeg, yuvj444p(pc, bt470bg/unknown/unknown, progressive), 6000x4000, q=2-31, 200 kb/s, 25 fps, 25 tbn
     Metadata:
-      encoder         : Lavc62.11.100 mjpeg
+      encoder         : Lavc62.19.100 mjpeg
     Side data:
-      cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[image2 @ 000001dab12d3ac0] The specified filename 'test_outputs\test_image2_bw_compressed.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 000001dab12d3ac0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
-[out#0/image2 @ 000001dab12d39c0] video:427KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
-frame=    1 fps=0.0 q=31.0 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.23x elapsed=0:00:00.17
+      EXIF metadata: (12270 bytes)
+      CPB properties: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+[image2 @ 00000210ea5de280] The specified filename 'test_outputs/test_image2_bw_compressed.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 00000210ea5de280] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[out#0/image2 @ 00000210ebda8280] video:427KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=    1 fps=0.0 q=31.0 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.147x elapsed=0:00:00.27
 ok
 test_resize_auto_half_real (__main__.TestImageEncoder.test_resize_auto_half_real) ...
 [Prova] Redimensionar a la meitat...
 Executant redimensionament amb escala 'iw/2:ih/2'...
-ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+ffmpeg version 8.0.git Copyright (c) 2000-2025 the FFmpeg developers
   built with gcc 15.2.0 (Rev8, Built by MSYS2 project)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-libshaderc --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
-  libavutil      60.  8.100 / 60.  8.100
-  libavcodec     62. 11.100 / 62. 11.100
-  libavformat    62.  3.100 / 62.  3.100
-  libavdevice    62.  1.100 / 62.  1.100
-  libavfilter    11.  4.100 / 11.  4.100
-  libswscale      9.  1.100 /  9.  1.100
-  libswresample   6.  1.100 /  6.  1.100
+  configuration:
+  libavutil      60. 18.100 / 60. 18.100
+  libavcodec     62. 19.100 / 62. 19.100
+  libavformat    62.  6.103 / 62.  6.103
+  libavdevice    62.  2.100 / 62.  2.100
+  libavfilter    11.  9.100 / 11.  9.100
+  libswscale      9.  3.100 /  9.  3.100
+  libswresample   6.  2.100 /  6.  2.100
 Input #0, image2, from 'test_image.jpg':
   Duration: 00:00:00.04, start: 0.000000, bitrate: 84217 kb/s
   Stream #0:0: Video: mjpeg (Progressive), yuvj444p(pc, bt470bg/unknown/unknown), 3000x1680, 25 fps, 25 tbr, 25 tbn
 Stream mapping:
   Stream #0:0 -> #0:0 (mjpeg (native) -> mjpeg (native))
 Press [q] to stop, [?] for help
-[swscaler @ 0000020f85296500] deprecated pixel format used, make sure you did set range correctly
-Output #0, image2, to 'test_outputs\test_image_half.jpg':
+[swscaler @ 000001b72fee6f00] deprecated pixel format used, make sure you did set range correctly
+Output #0, image2, to 'test_outputs/test_image_half.jpg':
   Metadata:
-    encoder         : Lavf62.3.100
+    encoder         : Lavf62.6.103
   Stream #0:0: Video: mjpeg, yuvj444p(pc, bt470bg/unknown/unknown, progressive), 1500x840, q=2-31, 200 kb/s, 25 fps, 25 tbn
     Metadata:
-      encoder         : Lavc62.11.100 mjpeg
+      encoder         : Lavc62.19.100 mjpeg
     Side data:
-      ICC Profile
-      cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[image2 @ 0000020f853559c0] The specified filename 'test_outputs\test_image_half.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 0000020f853559c0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
-[out#0/image2 @ 0000020f853558c0] video:61KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
-frame=    1 fps=0.0 q=5.9 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=1.08x elapsed=0:00:00.03
+      ICC Profile: (3556 bytes)
+      EXIF metadata: (197 bytes)
+      CPB properties: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+[image2 @ 000001b72ff3e980] The specified filename 'test_outputs/test_image_half.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 000001b72ff3e980] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[out#0/image2 @ 000001b72fe68140] video:61KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=    1 fps=0.0 q=5.9 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.461x elapsed=0:00:00.08
 Executant redimensionament amb escala 'iw/2:ih/2'...
-ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+ffmpeg version 8.0.git Copyright (c) 2000-2025 the FFmpeg developers
   built with gcc 15.2.0 (Rev8, Built by MSYS2 project)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-libshaderc --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
-  libavutil      60.  8.100 / 60.  8.100
-  libavcodec     62. 11.100 / 62. 11.100
-  libavformat    62.  3.100 / 62.  3.100
-  libavdevice    62.  1.100 / 62.  1.100
-  libavfilter    11.  4.100 / 11.  4.100
-  libswscale      9.  1.100 /  9.  1.100
-  libswresample   6.  1.100 /  6.  1.100
+  configuration:
+  libavutil      60. 18.100 / 60. 18.100
+  libavcodec     62. 19.100 / 62. 19.100
+  libavformat    62.  6.103 / 62.  6.103
+  libavdevice    62.  2.100 / 62.  2.100
+  libavfilter    11.  9.100 / 11.  9.100
+  libswscale      9.  3.100 /  9.  3.100
+  libswresample   6.  2.100 /  6.  2.100
 Input #0, image2, from 'test_image2.jpg':
   Duration: 00:00:00.04, start: 0.000000, bitrate: 1098443 kb/s
   Stream #0:0: Video: mjpeg (Baseline), yuvj422p(pc, bt470bg/unknown/unknown), 6000x4000, 25 fps, 25 tbr, 25 tbn
 Stream mapping:
   Stream #0:0 -> #0:0 (mjpeg (native) -> mjpeg (native))
 Press [q] to stop, [?] for help
-[swscaler @ 00000293f5382100] deprecated pixel format used, make sure you did set range correctly
-Output #0, image2, to 'test_outputs\test_image2_half.jpg':
+[swscaler @ 000001512c1e0bc0] deprecated pixel format used, make sure you did set range correctly
+Output #0, image2, to 'test_outputs/test_image2_half.jpg':
   Metadata:
-    encoder         : Lavf62.3.100
+    encoder         : Lavf62.6.103
   Stream #0:0: Video: mjpeg, yuvj422p(pc, bt470bg/unknown/unknown, progressive), 3000x2000, q=2-31, 200 kb/s, 25 fps, 25 tbn
     Metadata:
-      encoder         : Lavc62.11.100 mjpeg
+      encoder         : Lavc62.19.100 mjpeg
     Side data:
-      cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[image2 @ 00000293f5323580] The specified filename 'test_outputs\test_image2_half.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 00000293f5323580] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
-[out#0/image2 @ 00000293f5323480] video:182KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
-frame=    1 fps=0.0 q=7.4 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.334x elapsed=0:00:00.11
+      EXIF metadata: (12270 bytes)
+      CPB properties: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+[image2 @ 000001512a92e1c0] The specified filename 'test_outputs/test_image2_half.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 000001512a92e1c0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[out#0/image2 @ 000001512c188140] video:182KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=    1 fps=0.0 q=7.4 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.19x elapsed=0:00:00.21
 ok
 test_resize_both_real (__main__.TestImageEncoder.test_resize_both_real) ...
 [Prova] Redimensionar 100x200...
 Executant redimensionament amb escala '100:200'...
-ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+ffmpeg version 8.0.git Copyright (c) 2000-2025 the FFmpeg developers
   built with gcc 15.2.0 (Rev8, Built by MSYS2 project)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-libshaderc --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
-  libavutil      60.  8.100 / 60.  8.100
-  libavcodec     62. 11.100 / 62. 11.100
-  libavformat    62.  3.100 / 62.  3.100
-  libavdevice    62.  1.100 / 62.  1.100
-  libavfilter    11.  4.100 / 11.  4.100
-  libswscale      9.  1.100 /  9.  1.100
-  libswresample   6.  1.100 /  6.  1.100
+  configuration:
+  libavutil      60. 18.100 / 60. 18.100
+  libavcodec     62. 19.100 / 62. 19.100
+  libavformat    62.  6.103 / 62.  6.103
+  libavdevice    62.  2.100 / 62.  2.100
+  libavfilter    11.  9.100 / 11.  9.100
+  libswscale      9.  3.100 /  9.  3.100
+  libswresample   6.  2.100 /  6.  2.100
 Input #0, image2, from 'test_image.jpg':
   Duration: 00:00:00.04, start: 0.000000, bitrate: 84217 kb/s
   Stream #0:0: Video: mjpeg (Progressive), yuvj444p(pc, bt470bg/unknown/unknown), 3000x1680, 25 fps, 25 tbr, 25 tbn
 Stream mapping:
   Stream #0:0 -> #0:0 (mjpeg (native) -> mjpeg (native))
 Press [q] to stop, [?] for help
-[swscaler @ 00000150ba7a6140] deprecated pixel format used, make sure you did set range correctly
-Output #0, image2, to 'test_outputs\test_image_100x200.jpg':
+[swscaler @ 00000266bce12400] deprecated pixel format used, make sure you did set range correctly
+Output #0, image2, to 'test_outputs/test_image_100x200.jpg':
   Metadata:
-    encoder         : Lavf62.3.100
+    encoder         : Lavf62.6.103
   Stream #0:0: Video: mjpeg, yuvj444p(pc, bt470bg/unknown/unknown, progressive), 100x200, q=2-31, 200 kb/s, 25 fps, 25 tbn
     Metadata:
-      encoder         : Lavc62.11.100 mjpeg
+      encoder         : Lavc62.19.100 mjpeg
     Side data:
-      ICC Profile
-      cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[image2 @ 00000150ba8559c0] The specified filename 'test_outputs\test_image_100x200.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 00000150ba8559c0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
-[out#0/image2 @ 00000150ba8558c0] video:8KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
-frame=    1 fps=0.0 q=3.4 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=1.27x elapsed=0:00:00.03
+      ICC Profile: (3556 bytes)
+      EXIF metadata: (197 bytes)
+      CPB properties: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+[image2 @ 00000266bce5ea00] The specified filename 'test_outputs/test_image_100x200.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 00000266bce5ea00] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[out#0/image2 @ 00000266bcd88140] video:8KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=    1 fps=0.0 q=3.4 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.579x elapsed=0:00:00.06
 Executant redimensionament amb escala '100:200'...
-ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+ffmpeg version 8.0.git Copyright (c) 2000-2025 the FFmpeg developers
   built with gcc 15.2.0 (Rev8, Built by MSYS2 project)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-libshaderc --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
-  libavutil      60.  8.100 / 60.  8.100
-  libavcodec     62. 11.100 / 62. 11.100
-  libavformat    62.  3.100 / 62.  3.100
-  libavdevice    62.  1.100 / 62.  1.100
-  libavfilter    11.  4.100 / 11.  4.100
-  libswscale      9.  1.100 /  9.  1.100
-  libswresample   6.  1.100 /  6.  1.100
+  configuration:
+  libavutil      60. 18.100 / 60. 18.100
+  libavcodec     62. 19.100 / 62. 19.100
+  libavformat    62.  6.103 / 62.  6.103
+  libavdevice    62.  2.100 / 62.  2.100
+  libavfilter    11.  9.100 / 11.  9.100
+  libswscale      9.  3.100 /  9.  3.100
+  libswresample   6.  2.100 /  6.  2.100
 Input #0, image2, from 'test_image2.jpg':
   Duration: 00:00:00.04, start: 0.000000, bitrate: 1098443 kb/s
   Stream #0:0: Video: mjpeg (Baseline), yuvj422p(pc, bt470bg/unknown/unknown), 6000x4000, 25 fps, 25 tbr, 25 tbn
 Stream mapping:
   Stream #0:0 -> #0:0 (mjpeg (native) -> mjpeg (native))
 Press [q] to stop, [?] for help
-[swscaler @ 000002053328bb80] deprecated pixel format used, make sure you did set range correctly
-Output #0, image2, to 'test_outputs\test_image2_100x200.jpg':
+[swscaler @ 000001d13271f100] deprecated pixel format used, make sure you did set range correctly
+Output #0, image2, to 'test_outputs/test_image2_100x200.jpg':
   Metadata:
-    encoder         : Lavf62.3.100
+    encoder         : Lavf62.6.103
   Stream #0:0: Video: mjpeg, yuvj422p(pc, bt470bg/unknown/unknown, progressive), 100x200, q=2-31, 200 kb/s, 25 fps, 25 tbn
     Metadata:
-      encoder         : Lavc62.11.100 mjpeg
+      encoder         : Lavc62.19.100 mjpeg
     Side data:
-      cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[image2 @ 0000020533223580] The specified filename 'test_outputs\test_image2_100x200.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 0000020533223580] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
-[out#0/image2 @ 0000020533223480] video:3KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
-frame=    1 fps=0.0 q=2.9 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.389x elapsed=0:00:00.10
+      EXIF metadata: (12270 bytes)
+      CPB properties: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+[image2 @ 000001d130d8e1c0] The specified filename 'test_outputs/test_image2_100x200.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 000001d130d8e1c0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[out#0/image2 @ 000001d1326b8140] video:3KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=    1 fps=0.0 q=2.9 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.215x elapsed=0:00:00.18
 ok
 test_resize_only_height_real (__main__.TestImageEncoder.test_resize_only_height_real) ...
 [Prova] Redimensionar Alçada...
 Executant redimensionament amb escala '-2:240'...
-ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+ffmpeg version 8.0.git Copyright (c) 2000-2025 the FFmpeg developers
   built with gcc 15.2.0 (Rev8, Built by MSYS2 project)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-libshaderc --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
-  libavutil      60.  8.100 / 60.  8.100
-  libavcodec     62. 11.100 / 62. 11.100
-  libavformat    62.  3.100 / 62.  3.100
-  libavdevice    62.  1.100 / 62.  1.100
-  libavfilter    11.  4.100 / 11.  4.100
-  libswscale      9.  1.100 /  9.  1.100
-  libswresample   6.  1.100 /  6.  1.100
+  configuration:
+  libavutil      60. 18.100 / 60. 18.100
+  libavcodec     62. 19.100 / 62. 19.100
+  libavformat    62.  6.103 / 62.  6.103
+  libavdevice    62.  2.100 / 62.  2.100
+  libavfilter    11.  9.100 / 11.  9.100
+  libswscale      9.  3.100 /  9.  3.100
+  libswresample   6.  2.100 /  6.  2.100
 Input #0, image2, from 'test_image.jpg':
   Duration: 00:00:00.04, start: 0.000000, bitrate: 84217 kb/s
   Stream #0:0: Video: mjpeg (Progressive), yuvj444p(pc, bt470bg/unknown/unknown), 3000x1680, 25 fps, 25 tbr, 25 tbn
 Stream mapping:
   Stream #0:0 -> #0:0 (mjpeg (native) -> mjpeg (native))
 Press [q] to stop, [?] for help
-[swscaler @ 000001ca86459f40] deprecated pixel format used, make sure you did set range correctly
-Output #0, image2, to 'test_outputs\test_image_height_240.jpg':
+[swscaler @ 000001827b6f41c0] deprecated pixel format used, make sure you did set range correctly
+Output #0, image2, to 'test_outputs/test_image_height_240.jpg':
   Metadata:
-    encoder         : Lavf62.3.100
+    encoder         : Lavf62.6.103
   Stream #0:0: Video: mjpeg, yuvj444p(pc, bt470bg/unknown/unknown, progressive), 428x240, q=2-31, 200 kb/s, 25 fps, 25 tbn
     Metadata:
-      encoder         : Lavc62.11.100 mjpeg
+      encoder         : Lavc62.19.100 mjpeg
     Side data:
-      ICC Profile
-      cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[image2 @ 000001ca868959c0] The specified filename 'test_outputs\test_image_height_240.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 000001ca868959c0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
-[out#0/image2 @ 000001ca868958c0] video:16KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
-frame=    1 fps=0.0 q=3.8 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=1.24x elapsed=0:00:00.03
+      ICC Profile: (3556 bytes)
+      EXIF metadata: (197 bytes)
+      CPB properties: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+[image2 @ 000001827b7aea00] The specified filename 'test_outputs/test_image_height_240.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 000001827b7aea00] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[out#0/image2 @ 000001827b6d8140] video:16KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=    1 fps=0.0 q=3.8 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.549x elapsed=0:00:00.07
 Executant redimensionament amb escala '-2:240'...
-ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+ffmpeg version 8.0.git Copyright (c) 2000-2025 the FFmpeg developers
   built with gcc 15.2.0 (Rev8, Built by MSYS2 project)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-libshaderc --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
-  libavutil      60.  8.100 / 60.  8.100
-  libavcodec     62. 11.100 / 62. 11.100
-  libavformat    62.  3.100 / 62.  3.100
-  libavdevice    62.  1.100 / 62.  1.100
-  libavfilter    11.  4.100 / 11.  4.100
-  libswscale      9.  1.100 /  9.  1.100
-  libswresample   6.  1.100 /  6.  1.100
+  configuration:
+  libavutil      60. 18.100 / 60. 18.100
+  libavcodec     62. 19.100 / 62. 19.100
+  libavformat    62.  6.103 / 62.  6.103
+  libavdevice    62.  2.100 / 62.  2.100
+  libavfilter    11.  9.100 / 11.  9.100
+  libswscale      9.  3.100 /  9.  3.100
+  libswresample   6.  2.100 /  6.  2.100
 Input #0, image2, from 'test_image2.jpg':
   Duration: 00:00:00.04, start: 0.000000, bitrate: 1098443 kb/s
   Stream #0:0: Video: mjpeg (Baseline), yuvj422p(pc, bt470bg/unknown/unknown), 6000x4000, 25 fps, 25 tbr, 25 tbn
 Stream mapping:
   Stream #0:0 -> #0:0 (mjpeg (native) -> mjpeg (native))
 Press [q] to stop, [?] for help
-[swscaler @ 0000020d1d4000c0] deprecated pixel format used, make sure you did set range correctly
-Output #0, image2, to 'test_outputs\test_image2_height_240.jpg':
+[swscaler @ 0000024e37490780] deprecated pixel format used, make sure you did set range correctly
+Output #0, image2, to 'test_outputs/test_image2_height_240.jpg':
   Metadata:
-    encoder         : Lavf62.3.100
+    encoder         : Lavf62.6.103
   Stream #0:0: Video: mjpeg, yuvj422p(pc, bt470bg/unknown/unknown, progressive), 360x240, q=2-31, 200 kb/s, 25 fps, 25 tbn
     Metadata:
-      encoder         : Lavc62.11.100 mjpeg
+      encoder         : Lavc62.19.100 mjpeg
     Side data:
-      cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[image2 @ 0000020d1d033580] The specified filename 'test_outputs\test_image2_height_240.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 0000020d1d033580] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
-[out#0/image2 @ 0000020d1d033480] video:7KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
-frame=    1 fps=0.0 q=3.8 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.39x elapsed=0:00:00.10
+      EXIF metadata: (12270 bytes)
+      CPB properties: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+[image2 @ 0000024e374fe1c0] The specified filename 'test_outputs/test_image2_height_240.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0000024e374fe1c0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[out#0/image2 @ 0000024e37408140] video:7KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=    1 fps=0.0 q=3.8 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.22x elapsed=0:00:00.18
 ok
 test_resize_only_width_real (__main__.TestImageEncoder.test_resize_only_width_real) ...
 [Prova] Redimensionar Amplada...
 Executant redimensionament amb escala '320:-2'...
-ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+ffmpeg version 8.0.git Copyright (c) 2000-2025 the FFmpeg developers
   built with gcc 15.2.0 (Rev8, Built by MSYS2 project)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-libshaderc --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
-  libavutil      60.  8.100 / 60.  8.100
-  libavcodec     62. 11.100 / 62. 11.100
-  libavformat    62.  3.100 / 62.  3.100
-  libavdevice    62.  1.100 / 62.  1.100
-  libavfilter    11.  4.100 / 11.  4.100
-  libswscale      9.  1.100 /  9.  1.100
-  libswresample   6.  1.100 /  6.  1.100
+  configuration:
+  libavutil      60. 18.100 / 60. 18.100
+  libavcodec     62. 19.100 / 62. 19.100
+  libavformat    62.  6.103 / 62.  6.103
+  libavdevice    62.  2.100 / 62.  2.100
+  libavfilter    11.  9.100 / 11.  9.100
+  libswscale      9.  3.100 /  9.  3.100
+  libswresample   6.  2.100 /  6.  2.100
 Input #0, image2, from 'test_image.jpg':
   Duration: 00:00:00.04, start: 0.000000, bitrate: 84217 kb/s
   Stream #0:0: Video: mjpeg (Progressive), yuvj444p(pc, bt470bg/unknown/unknown), 3000x1680, 25 fps, 25 tbr, 25 tbn
 Stream mapping:
   Stream #0:0 -> #0:0 (mjpeg (native) -> mjpeg (native))
 Press [q] to stop, [?] for help
-[swscaler @ 000002a901f2d840] deprecated pixel format used, make sure you did set range correctly
-Output #0, image2, to 'test_outputs\test_image_width_320.jpg':
+[swscaler @ 0000027408eb13c0] deprecated pixel format used, make sure you did set range correctly
+Output #0, image2, to 'test_outputs/test_image_width_320.jpg':
   Metadata:
-    encoder         : Lavf62.3.100
+    encoder         : Lavf62.6.103
   Stream #0:0: Video: mjpeg, yuvj444p(pc, bt470bg/unknown/unknown, progressive), 320x180, q=2-31, 200 kb/s, 25 fps, 25 tbn
     Metadata:
-      encoder         : Lavc62.11.100 mjpeg
+      encoder         : Lavc62.19.100 mjpeg
     Side data:
-      ICC Profile
-      cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[image2 @ 000002a901fc59c0] The specified filename 'test_outputs\test_image_width_320.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 000002a901fc59c0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
-[out#0/image2 @ 000002a901fc58c0] video:12KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
-frame=    1 fps=0.0 q=3.7 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=1.15x elapsed=0:00:00.03
+      ICC Profile: (3556 bytes)
+      EXIF metadata: (197 bytes)
+      CPB properties: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+[image2 @ 0000027408edea00] The specified filename 'test_outputs/test_image_width_320.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0000027408edea00] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[out#0/image2 @ 0000027408e08140] video:12KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=    1 fps=0.0 q=3.7 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.561x elapsed=0:00:00.07
 Executant redimensionament amb escala '320:-2'...
-ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+ffmpeg version 8.0.git Copyright (c) 2000-2025 the FFmpeg developers
   built with gcc 15.2.0 (Rev8, Built by MSYS2 project)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-libshaderc --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
-  libavutil      60.  8.100 / 60.  8.100
-  libavcodec     62. 11.100 / 62. 11.100
-  libavformat    62.  3.100 / 62.  3.100
-  libavdevice    62.  1.100 / 62.  1.100
-  libavfilter    11.  4.100 / 11.  4.100
-  libswscale      9.  1.100 /  9.  1.100
-  libswresample   6.  1.100 /  6.  1.100
+  configuration:
+  libavutil      60. 18.100 / 60. 18.100
+  libavcodec     62. 19.100 / 62. 19.100
+  libavformat    62.  6.103 / 62.  6.103
+  libavdevice    62.  2.100 / 62.  2.100
+  libavfilter    11.  9.100 / 11.  9.100
+  libswscale      9.  3.100 /  9.  3.100
+  libswresample   6.  2.100 /  6.  2.100
 Input #0, image2, from 'test_image2.jpg':
   Duration: 00:00:00.04, start: 0.000000, bitrate: 1098443 kb/s
   Stream #0:0: Video: mjpeg (Baseline), yuvj422p(pc, bt470bg/unknown/unknown), 6000x4000, 25 fps, 25 tbr, 25 tbn
 Stream mapping:
   Stream #0:0 -> #0:0 (mjpeg (native) -> mjpeg (native))
 Press [q] to stop, [?] for help
-[swscaler @ 0000017f1f0800c0] deprecated pixel format used, make sure you did set range correctly
-Output #0, image2, to 'test_outputs\test_image2_width_320.jpg':
+[swscaler @ 000002dd53ec51c0] deprecated pixel format used, make sure you did set range correctly
+Output #0, image2, to 'test_outputs/test_image2_width_320.jpg':
   Metadata:
-    encoder         : Lavf62.3.100
+    encoder         : Lavf62.6.103
   Stream #0:0: Video: mjpeg, yuvj422p(pc, bt470bg/unknown/unknown, progressive), 320x214, q=2-31, 200 kb/s, 25 fps, 25 tbn
     Metadata:
-      encoder         : Lavc62.11.100 mjpeg
+      encoder         : Lavc62.19.100 mjpeg
     Side data:
-      cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[image2 @ 0000017f1ecb3580] The specified filename 'test_outputs\test_image2_width_320.jpg' does not contain an image sequence pattern or a pattern is invalid.
-[image2 @ 0000017f1ecb3580] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
-[out#0/image2 @ 0000017f1ecb3480] video:6KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
-frame=    1 fps=0.0 q=3.7 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.385x elapsed=0:00:00.10
+      EXIF metadata: (12270 bytes)
+      CPB properties: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+[image2 @ 000002dd5280e1c0] The specified filename 'test_outputs/test_image2_width_320.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 000002dd5280e1c0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[out#0/image2 @ 000002dd53e48140] video:6KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=    1 fps=0.0 q=3.7 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.223x elapsed=0:00:00.17
 ok
 test_serpentine_empty_raises (__main__.TestSerpentineScanner.test_serpentine_empty_raises) ... ok
 test_serpentine_square (__main__.TestSerpentineScanner.test_serpentine_square) ... ok
 test_serpentine_real_images (__main__.TestSerpentineRealImages.test_serpentine_real_images) ...
 [Prova] Escaneig Serpentí (Imatges Reals)...
-  > Serpentí generat (primers 500) per test_image a test_outputs_serpentine\test_image_serpentine_first500.txt
-  > Serpentí generat (primers 500) per test_image2 a test_outputs_serpentine\test_image2_serpentine_first500.txt
+  > Serpentí generat (primers 500) per test_image a test_outputs_serpentine/test_image_serpentine_first500.txt
+  > Serpentí generat (primers 500) per test_image2 a test_outputs_serpentine/test_image2_serpentine_first500.txt
 ok
 test_rle_alternating (__main__.TestRLEConverter.test_rle_alternating) ... ok
 test_rle_empty (__main__.TestRLEConverter.test_rle_empty) ... ok
@@ -350,7 +358,7 @@ test_dct_inverse_roundtrip_random (__main__.TestDCTConverter.test_dct_inverse_ro
 test_dwt_inverse_roundtrip (__main__.TestDWTConverter.test_dwt_inverse_roundtrip) ... ok
 
 ----------------------------------------------------------------------
-Ran 15 tests in 20.704s
+Ran 15 tests in 46.719s
 
 OK
 
