@@ -20,7 +20,7 @@ Així doncs, l’estructura de fitxers del projecte és la següent:
 		→ Dockerfile \[Configuració del contenidor\]  
 		→ requirements.txt
 
-![][image1]
+![](./assets/image1.png)
 
 Inicialment, el document *requirements.txt* només inclou les dues llibreries *fastapi* i *uvicorn*.
 
@@ -34,23 +34,23 @@ Construir la imatge del Docker
 
 `docker build -t scav-practice-api .`
 
-`![][image2]`
+![](./assets/image2.png)
 
 Executar el contenidor:
 
 `docker run -d --name scav-api -p 8000:80 scav-practice-api`
 
-`![][image3]`
+![](./assets/image3.png)
 
 Verificar que realment funciona:
 
 - Resposta JSON: [`http://localhost:8000/`](http://localhost:8000/)
 
-  ![][image4]
+  ![](./assets/image4.png)
 
 - Documentació automàtica (Swagger): [`http://localhost:8000/docs`](http://localhost:8000/docs) 
 
-`![][image5]`
+![](./assets/image5.png)
 
 - **Resultat:** Tenim com a punt de partida pels propers exercicis una API funcional a la que podem accedir des del port 8000 que respon a peticions HTTP. 
 
@@ -65,13 +65,13 @@ Per construir la imatge hem fet servir la comanda:
 
 `docker build -t scav-ffmpeg ./ffmpeg`
 
-`![][image6]`
+![](./assets/image6.png)
 
 I, per executar el contenidor per veure si *FFmpeg* respon a `ffmpeg -version`:
 
 `docker run --rm scav-ffmpeg -version`
 
-`![][image7]`
+![](./assets/image7.png)
 
 D’aquesta manera tenim *FFmpeg* a un Docker independent, que més endavant podrem integrar amb la API per implementar les funcionalitats del *Seminari 1*. 
 
@@ -98,7 +98,7 @@ docker rm \-f scav-api   → Esborrem el contenidor vell si s’estava executant
 
 docker run \-d \--name scav-api \-p 8000:80 scav-practice-api
 
-![][image8]
+![](./assets/image8.png)
 
 ## **Task 4: Creació d'Endpoints**
 
@@ -120,34 +120,30 @@ Com hem modificat l’entorn, hem de reconstruir la imatge perquè els canvis s�
 - `docker build -t scav-practice-api .` → Reconstruir la imatge amb el nou codi  
 - `docker run -d --name scav-api -p 8000:80 scav-practice-api` → Executar el nou contenidor
 
-![][image9]
+![](./assets/image9.png)
 
 Podem provar la API seguint els següents passos:
 
 1. Accedir a: [http://localhost:8000/docs](http://localhost:8000/docs)  
-   ![][image10]  
+   ![](./assets/image10.png)
 2. Provar *POST /converter/rgb-to-yuv \-\> Try it out.*  
 3. Canviar el JSON d’exemple per:
 
-   `{`
-
-     `"r": 255,`
-
-     `"g": 0,`
-
-     `"b": 0`
-
-   `}`
+   `{
+	"r": 255,
+	"g": 0,
+	"b": 0
+	}`
 
 4. Executar i veure si retorna el resultat esperat. 
 
-![][image11]  
-![][image12]
+![](./assets/image11.png)
+![](./assets/image12.png)
 
 Podem provar cadascun dels serveis que hem implementat amb els endpoints, però és important saber que només funcionen aquells que es basin en Python (sense *FFmpeg*), ja que de moment no tenim accés a comandes *FFmpeg*. 
 
-![][image13]  
-![][image14]
+![](./assets/image13.png)
+![](./assets/image14.png)
 
 ## **Task 5: Orquestració amb Docker Compose**
 
@@ -167,28 +163,30 @@ El pas a pas de la implementació és el següent:
 5. Creació de la carpeta *shared\_data* dins la carpeta arrel.   
 6. Executar el servei: `docker-compose up --build`
 
-`![][image15]`
+![](./assets/image15.png)
 
-`![][image16]`
+![](./assets/image16.png)
 
 Per comprovar la funcionalitat dels diferents *endpoints* implementats hem llançat algunes proves des de la API ([http://localhost:8000/docs](http://localhost:8000/docs)). 
 
-![][image17]
+![](./assets/image17.png)
 
 El procés intern quan executem aquestes comandes és el següent:
 
-1. La API rep la imatge i la guarda a `shared_data/test_image.jpg`.  
-2. La API llança la comanda d’execució a `ffmpeg-service` sobre */shared/test\_image.jpg*.  
-3. El contenidor d'FFmpeg executa la comanda i guarda el resultat a *shared\_data/bw\_test\_image.jpg*.  
+1. La API rep la imatge i la guarda a `shared_data/test_image.png`.  
+2. La API llança la comanda d’execució a `ffmpeg-service` sobre */shared/test\_image.png*.  
+3. El contenidor d'FFmpeg executa la comanda i guarda el resultat a *shared\_data/bw\_test\_image.png*.  
 4. La API llegeix el fitxer resultant i el mostra al navegador.
 
-![][image18]
+![](./assets/image18.png)
 
-![][image19]
+![](./assets/image19.png)
 
-![][image20]![][image21]
+![](./assets/image20.png)
 
-![][image22]
+![](./assets/image21.png)
+
+![](./assets/image22.png)
 
 ## **6\. Instruccions d'Ús**
 
