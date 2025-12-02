@@ -1,6 +1,6 @@
 # **Pràctica 1: API & Dockerization**
 
-Aquest repositori conté la implementació de la **Pràctica 1** de l'assignatura de **Sistemes de Codificació d'Àudio i Vídeo (SCAV)**. El projecte consisteix en una arquitectura de microserveis basada en **Docker** que fa servir FastAPI per executar algoritmes de manipulació d’imatges i vídeo, integrant la lògica del Seminari 1 i delegant tasques a un contenidor independent d'FFmpeg.
+Aquest repositori conté la implementació de la **Pràctica 1** de l'assignatura de **Sistemes de Codificació d'Àudio i Vídeo (SCAV)**. 
 
 ## **Task 1: Creació de l'API i Dockerització**
 
