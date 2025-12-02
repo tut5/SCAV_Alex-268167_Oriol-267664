@@ -19,8 +19,8 @@ from app.scav_logic import (
 
 app = FastAPI(
     title="SCAV Practice 1 API",
-    description="API completa amb els algoritmes del Seminari 1",
-    version="1.1.0"
+    description="API lab1 (SCAV)",
+    version="2.0.0"
 )
 
 # --- MODELS DE DADES (Pydantic) ---
@@ -144,36 +144,36 @@ SHARED_FOLDER = "/shared"
 
 @app.post("/image/resize", tags=["FFmpeg"])
 async def resize_image_endpoint(width: int = None, height: int = None, file: UploadFile = File(...)):
-    # 1. Guardem el fitxer que puja l'usuari a la carpeta compartida
+    # Guardem el fitxer que puja l'usuari a la carpeta compartida
     file_location = f"{SHARED_FOLDER}/{file.filename}"
     with open(file_location, "wb+") as file_object:
         shutil.copyfileobj(file.file, file_object)
     
-    # 2. Definim el nom de sortida
+    # Definim el nom de sortida
     output_filename = f"resized_{file.filename}"
     
-    # 3. Cridem al contenidor d'FFmpeg via la nostra classe lògica
+    # Cridem al contenidor d'FFmpeg
     encoder = ImageEncoder()
     encoder.resize_image(file.filename, output_filename, width, height)
     
-    # 4. Retornem el fitxer processat
+    # Retornem el fitxer processat
     output_path = f"{SHARED_FOLDER}/{output_filename}"
     return FileResponse(output_path)
 
 @app.post("/image/compress-bw", tags=["FFmpeg"])
 async def compress_bw_endpoint(file: UploadFile = File(...)):
-    # 1. Guardem el fitxer
+    # Guardem el fitxer
     file_location = f"{SHARED_FOLDER}/{file.filename}"
     with open(file_location, "wb+") as file_object:
         shutil.copyfileobj(file.file, file_object)
     
-    # 2. Definim sortida
+    # Definim sortida
     output_filename = f"bw_{file.filename}"
     
-    # 3. Executem la conversió al contenidor veí
+    # Executem la conversió al contenidor ffmpeg
     encoder = ImageEncoder()
     encoder.compress_bw(file.filename, output_filename)
     
-    # 4. Retornem resultat
+    # Resultat
     output_path = f"{SHARED_FOLDER}/{output_filename}"
     return FileResponse(output_path)

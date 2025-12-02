@@ -2,6 +2,11 @@ import unittest
 import numpy as np
 from app.scav_logic import ColorTranslator, SerpentineScanner, RLEConverter, DCTConverter, DWTConverter
 
+
+# Adaptació del Seminari 1 
+# Hem fet ús de la IA per adaptar el codi
+# Ha estat revisat i modificat per nosaltres posteriorment
+
 class TestSCAVLogic(unittest.TestCase):
 
     def setUp(self):

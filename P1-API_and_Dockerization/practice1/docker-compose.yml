@@ -1,22 +1,20 @@
 services:
-  # SERVEI 1: La teva API
+  # SERVEI 1: API
   api:
     build: .
     container_name: scav-api
     ports:
       - "8000:80"
     volumes:
-      - ./shared_data:/shared                # Carpeta compartida (Host <-> Container)
+      - ./shared_data:/shared # Carpeta compartida
       - /var/run/docker.sock:/var/run/docker.sock # PERMET CONTROLAR DOCKER
     depends_on:
       - ffmpeg-service
 
-  # SERVEI 2: El contenidor d'FFmpeg
+  # SERVEI 2: Contenidor FFmpeg
   ffmpeg-service:
     build: ./ffmpeg
     container_name: ffmpeg-service
     volumes:
-      - ./shared_data:/shared                # Mateixa carpeta compartida
-    # TRUC: Per defecte ffmpeg surt immediatament després de mostrar l'ajuda.
-    # Aquesta comanda el manté "viu" infinitament sense fer res, esperant ordres de l'API.
-    entrypoint: ["tail", "-f", "/dev/null"]
+      - ./shared_data:/shared # Mateixa carpeta compartida
+    entrypoint: ["tail", "-f", "/dev/null"] # Esperar més ordres

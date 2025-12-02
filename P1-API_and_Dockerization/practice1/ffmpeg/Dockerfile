@@ -1,17 +1,16 @@
-# 1. Fem servir una imatge base molt lleugera (Alpine Linux)
+# Alpine Linux (imatge molt lleugera)
 FROM alpine:3.19
 
-# 2. Instal·lem FFmpeg
-# 'apk' és el gestor de paquets d'Alpine (similar a 'apt' a Ubuntu)
+# Instalacio ffmpeg
+# 'apk' --> gestor de paquets d'Alpine
 RUN apk update && \
     apk add --no-cache ffmpeg
 
-# 3. Establim un directori de treball per defecte
+# Directori de treball
 WORKDIR /tmp
 
-# 4. Definim el punt d'entrada
-# Això fa que quan executis el contenidor, actuï directament com la comanda 'ffmpeg'
+# Definim el punt d'entrada
 ENTRYPOINT ["ffmpeg"]
 
-# 5. Comanda per defecte (si no li passem arguments, mostra l'ajuda)
+# Comanda per defecte
 CMD ["--help"]
