@@ -187,6 +187,7 @@ async def compress_bw_endpoint(file: UploadFile = File(...)):
 async def resize_video_endpoint(
     width: int = None, 
     height: int = None, 
+    output_name: str = None,
     file: UploadFile = File(...)
 ):
     # Guardem el vídeo a la carpeta compartida
@@ -195,7 +196,13 @@ async def resize_video_endpoint(
         shutil.copyfileobj(file.file, file_object)
     
     # Definim nom de sortida
-    output_filename = f"resized_{file.filename}"
+    if output_name:
+        output_filename = output_name
+        if "." not in output_filename:
+            ext = file.filename.split(".")[-1]
+            output_filename = f"{output_filename}.{ext}"
+    else:
+        output_filename = f"resized_{file.filename}"
     
     # Processem el vídeo 
     processor = VideoProcessor()
@@ -205,9 +212,14 @@ async def resize_video_endpoint(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error en el processament de vídeo: {str(e)}")
     
-    # Retornem el vídeo
-    output_path = f"{SHARED_FOLDER}/{output_filename}"
-    return FileResponse(output_path)
+    # Retornem la ruta del video (si retornem el video en si el navegador es satura)
+    return {
+        "message": "Video processat correctament",
+        "output_location": f"{SHARED_FOLDER}/{output_filename}",
+        "access_on_host": f"./shared_data/{output_filename}", # Ruta
+        "width": width,
+        "height": height
+    }
 
 # ---------------------------------------------------------------------------
 # SEMINARI 2 - TASK 2: MODIFICAR EL SUBMOSTREIG DE CROMA
@@ -222,6 +234,7 @@ class ChromaOption(str, Enum):
 @app.post("/video/chroma-subsampling", tags=["S2 - Video"])
 async def chroma_subsampling_endpoint(
     subsampling: ChromaOption, 
+    output_name: str = None,
     file: UploadFile = File(...)
 ):
     # Guardar fitxer
@@ -229,8 +242,15 @@ async def chroma_subsampling_endpoint(
     with open(file_location, "wb+") as file_object:
         shutil.copyfileobj(file.file, file_object)
     
-    # Nom de sortida
-    output_filename = f"{subsampling.value}_{file.filename}"
+    # Definim nom de sortida
+    if output_name:
+        output_filename = output_name
+        if "." not in output_filename:
+            ext = file.filename.split(".")[-1]
+            output_filename = f"{output_filename}.{ext}"
+    else:
+        # Per defecte usem el valor del subsampling (ex: yuv422p_video.mp4)
+        output_filename = f"{subsampling.value}_{file.filename}"
     
     # Processar el video
     processor = VideoProcessor()
@@ -243,9 +263,13 @@ async def chroma_subsampling_endpoint(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error canviant chroma: {str(e)}")
     
-    # Retornar el resultat obtingut
-    output_path = f"{SHARED_FOLDER}/{output_filename}"
-    return FileResponse(output_path)
+    # Retornem la ruta del video (si retornem el video en si el navegador es satura)
+    return {
+        "message": "Submostreig de croma modificat correctament",
+        "output_location": f"{SHARED_FOLDER}/{output_filename}",
+        "access_on_host": f"./shared_data/{output_filename}",
+        "chroma": subsampling.value
+    }
 
 # ---------------------------------------------------------------------------
 # SEMINARI 2 - TASK 3: VIDEO INFO (ffprobe)
@@ -271,14 +295,23 @@ async def get_video_info_endpoint(file: UploadFile = File(...)):
 # ---------------------------------------------------------------------------
 
 @app.post("/video/bbb-container", tags=["S2 - Video"])
-async def bbb_container_endpoint(file: UploadFile = File(...)):
+async def bbb_container_endpoint(
+    output_name: str = None,
+    file: UploadFile = File(...)
+):
     # Guardar fitxer
     file_location = f"{SHARED_FOLDER}/{file.filename}"
     with open(file_location, "wb+") as file_object:
         shutil.copyfileobj(file.file, file_object)
     
-    # Nom de sortida
-    output_filename = f"bbb_container_{file.filename}"
+    # Definim nom de sortida
+    if output_name:
+        output_filename = output_name
+        if "." not in output_filename:
+            ext = file.filename.split(".")[-1]
+            output_filename = f"{output_filename}.{ext}"
+    else:
+        output_filename = f"bbb_container_{file.filename}"
     
     # Processar
     processor = VideoProcessor()
@@ -287,9 +320,12 @@ async def bbb_container_endpoint(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error creant contenidor: {str(e)}")
     
-    # Retornar el resultat obtingut
-    output_path = f"{SHARED_FOLDER}/{output_filename}"
-    return FileResponse(output_path)
+    # Retornem la ruta del video (si retornem el video en si el navegador es satura)
+    return {
+        "message": "Contenidor BBB creat correctament (Vídeo tallat + 3 Àudios)",
+        "output_location": f"{SHARED_FOLDER}/{output_filename}",
+        "access_on_host": f"./shared_data/{output_filename}"
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -319,14 +355,23 @@ async def count_tracks_endpoint(file: UploadFile = File(...)):
 # ---------------------------------------------------------------------------
 
 @app.post("/video/motion-vectors", tags=["S2 - Video"])
-async def motion_vectors_endpoint(file: UploadFile = File(...)):
+async def motion_vectors_endpoint(
+    output_name: str = None,
+    file: UploadFile = File(...)
+):
     # Guardar fitxer
     file_location = f"{SHARED_FOLDER}/{file.filename}"
     with open(file_location, "wb+") as file_object:
         shutil.copyfileobj(file.file, file_object)
     
-    # Nom de sortida
-    output_filename = f"motion_vectors_{file.filename}"
+    # Definim nom de sortida
+    if output_name:
+        output_filename = output_name
+        if "." not in output_filename:
+            ext = file.filename.split(".")[-1]
+            output_filename = f"{output_filename}.{ext}"
+    else:
+        output_filename = f"motion_vectors_{file.filename}"
     
     # Processar el vídeo
     processor = VideoProcessor()
@@ -335,9 +380,12 @@ async def motion_vectors_endpoint(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error generant vectors: {str(e)}")
     
-    # Retornar el resultat obtingut
-    output_path = f"{SHARED_FOLDER}/{output_filename}"
-    return FileResponse(output_path)
+    # Retornem la ruta del video (si retornem el video en si el navegador es satura)
+    return {
+        "message": "Vídeo amb vectors de moviment generat correctament",
+        "output_location": f"{SHARED_FOLDER}/{output_filename}",
+        "access_on_host": f"./shared_data/{output_filename}"
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -345,14 +393,23 @@ async def motion_vectors_endpoint(file: UploadFile = File(...)):
 # ---------------------------------------------------------------------------
 
 @app.post("/video/yuv-histogram", tags=["S2 - Video"])
-async def yuv_histogram_endpoint(file: UploadFile = File(...)):
+async def yuv_histogram_endpoint(
+    output_name: str = None,
+    file: UploadFile = File(...)
+):
     # Guardar fitxer
     file_location = f"{SHARED_FOLDER}/{file.filename}"
     with open(file_location, "wb+") as file_object:
         shutil.copyfileobj(file.file, file_object)
     
-    # Nom de sortida
-    output_filename = f"yuv_histogram_{file.filename}"
+    # Definim nom de sortida
+    if output_name:
+        output_filename = output_name
+        if "." not in output_filename:
+            ext = file.filename.split(".")[-1]
+            output_filename = f"{output_filename}.{ext}"
+    else:
+        output_filename = f"yuv_histogram_{file.filename}"
     
     # Processar el vídeo
     processor = VideoProcessor()
@@ -361,6 +418,9 @@ async def yuv_histogram_endpoint(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error generant histograma: {str(e)}")
     
-    # Retornar el resultat obtingut
-    output_path = f"{SHARED_FOLDER}/{output_filename}"
-    return FileResponse(output_path)
+    # Retornem la ruta del video (si retornem el video en si el navegador es satura)
+    return {
+        "message": "Vídeo amb histograma YUV generat correctament",
+        "output_location": f"{SHARED_FOLDER}/{output_filename}",
+        "access_on_host": f"./shared_data/{output_filename}"
+    }
