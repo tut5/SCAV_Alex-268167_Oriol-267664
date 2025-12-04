@@ -1,95 +1,198 @@
-# **Pràctica 2: MPEG-4 & Nous Endpoints (FFmpeg Integration)**
+# **Seminari 2: MPEG4 & More Endpoints**
 
-Aquest repositori conté la implementació de la **Pràctica 2 (S2)** de l'assignatura de **Sistemes de Codificació d'Àudio i Vídeo (SCAV)**. L'objectiu principal d'aquest seminari és estendre la API creada a la Pràctica 1 per incloure funcionalitats avançades de manipulació d'imatge (relacionades amb conceptes de MPEG-4) mitjançant la integració amb **FFmpeg** via Docker.
+Aquest repositori es basa en la resolució del *Seminari 2*, sent aquest l’extensió del *Seminari 1* i la *Pràctica 1*. En aquest cas hem afegit a la nostra API capacitats de manipulació i imatge de vídeo fent servir *FFmpeg* dins un contenidor independent. 
 
-## **Task 1: Actualització de l'Estructura i Dependències**
+## **Estructura del Projecte**
 
-Enunciat:
-*“Implement new endpoints involving MPEG-4 concepts and ensure the communication between the Python API and the FFmpeg service works via Docker.”*
+Hem mantingut l’estructura bàsica del projecte, implementant la lògica de les noves funcions a *app/scav\_logic.py* amb tots els endpoints corresponents a *app/main.py*. Aquests endpoints i lògica es corresponen a les diferents tasques proposades pel *Seminari 2*. 
 
-Hem partit de l'estructura de la Pràctica 1 i hem afegit els elements necessaris per comunicar la API amb el contenidor d'FFmpeg.
+```
+→ Practice1/
+	→ app/
+		→ __init__.py
+		→ main.py [API amb nous endpoints enfocats al processament de vídeo]
+		→ scav_logic.py [Nova classe VideoProcessor amb la lògica de les diferents tasques]
+	→ ffmpeg
+		→ Dockerfile
+→ Dockerfile
+	→ docker-compose.yml   [API + FFmpeg]
+	→ requirements.txt
+	→ shared_data/
+```
 
-L'estructura de fitxers actualitzada és la següent:
+## **Nous Endpoints (API)**
 
-	→ S2-MPEG4_and_MoreEndpoints/
-		→ app/
-			→ main.py [Nous endpoints afegits]
-			→ scav_logic.py [Lògica de comunicació amb Docker]
-		→ ffmpeg/ [Dockerfile del servei FFmpeg]
-		→ shared_data/ [Volum compartit per imatges]
-		→ docker-compose.yml [Orquestració de serveis]
-		→ requirements.txt [Dependències actualitzades]
+Els diferents *endpoints* que hem afegit i implementat son els següents:
+![](./assets/endpoints.png)
 
-Hem actualitzat el fitxer *requirements.txt* per incloure la llibreria `docker`, necessària per controlar contenidors des de Python.
+## **Task 1: Redimensionament de Vídeo**
 
-## **Task 2: Dockerització d'FFmpeg i Volums**
+**Enunciat:** *"Create a new endpoint / feature which will let you to modify the resolution (use FFmpeg in the backend)."*
 
-Per permetre la manipulació d'imatges utilitzant eines externes, hem creat un servei dedicat a FFmpeg.
+Hem implementat un endpoint que permet penjar un vídeo que tinguem descarregat en local i canviar-li la resolució.
 
-El funcionament és el següent:
-1.  **Dockerfile d'FFmpeg:** Hem creat una imatge lleugera basada en Alpine amb FFmpeg instal·lat a la carpeta `ffmpeg/`.
-2.  **Volum Compartit:** Hem definit una carpeta `shared_data` que actua com a pont. Tant la API com el contenidor d'FFmpeg tenen accés a aquesta carpeta. Això permet que la API guardi una imatge, FFmpeg la processi, i la API la llegeixi de nou sense necessitat de transferir bytes directament per la xarxa.
+- **Endpoint:** `POST /video/resize`  
+- **Funcionament:**  
+  1. Pengem un vídeo i especifiquem `width` i `height`. En cas de només especificar una de les dues dades es mantindrà la relació d’aspecte original i, en cas de que no indiquem res, per defecte obtindrem un vídeo amb la meitat de resolució que l’original  
+  2. Fem servir la llibreria `docker` de Python per enviar la comanda `ffmpeg -vf scale=...` al contenidor de *FFmpeg*.  
+  3. Per evitar saturar el navegador amb la descàrrega de fitxers grans, l'endpoint retorna un JSON amb la ruta del fitxer output a la carpeta per defecte `shared_data` a la que podem accedir en local per comprovar els resultats.
 
-## **Task 3: Nous Endpoints a la API (MPEG-4 Concepts)**
+**Exemple d'ús:**
 
-Enunciat:
-*“Create endpoints to process actions involving FFmpeg interactions like resizing or chroma subsampling.”*
+Input:
+![](./assets/task1_input.png)
+Output:
+![](./assets/task1_output.png)
+Verificació amb *ffprobe* (canvi de resolució):
+![](./assets/task1_ffprobe.png)
 
-Hem modificat `main.py` per exposar aquestes funcionalitats. Els nous *endpoints* implementen conceptes clau de la codificació MPEG-4:
+## **Task 2: Submostreig de Croma (Chroma Subsampling)**
 
-- **`POST /image/resize`**: Rep una imatge i redueix la seva resolució espacial (downscaling). Això simula la reducció de càrrega per bitrate en vídeo.
-- **`POST /image/compress-bw`**: Rep una imatge i elimina la informació de crominància, deixant només la luminància (escala de grisos), un concepte fonamental en la compressió de vídeo.
+**Enunciat:** *"Create a new endpoint / feature which will let you to modify the chroma subsampling."*
 
-## **Task 4: Lògica d'Orquestració (scav_logic.py)**
+Aquest endpoint permet canviar el *chroma subsampling* del vídeo, cosa que afecta a com es guarda la informació de color.
 
-Per connectar la API amb el contenidor d'FFmpeg, hem modificat `app/scav_logic.py`.
+- **Endpoint:** `POST /video/chroma-subsampling`  
+- **Opcions disponibles:**  
+  - `yuv420p` (Estàndard, 4:2:0)  
+  - `yuv422p` (Alta qualitat, 4:2:2)  
+  - `yuv444p` (Sense compressió de color, 4:4:4)  
+- **Implementació:** Utilitza el flag `-pix_fmt` de *FFmpeg* i recodifica el vídeo amb `libx264` per aplicar els canvis.
 
-El flux d'execució és:
-1.  La API rep un `UploadFile` i el guarda a `./shared_data`.
-2.  Utilitzant la llibreria `docker` de Python, la API es connecta al socket de Docker (`/var/run/docker.sock`).
-3.  La API executa una comanda `ffmpeg` dins del contenidor `scav-ffmpeg`, apuntant als fitxers del volum compartit.
-4.  Un cop FFmpeg acaba, la API retorna el fitxer resultant.
+**Exemple d'ús:**
 
-## **Task 5: Execució amb Docker Compose**
+Input (canviant a `yuv444p`, sent `yuv420p` l’original):
+![](./assets/task2_input.png)
+Output:
+![](./assets/task2_output.png)
+Verificació amb ffprobe (format de pixel):
+![](./assets/task2_ffprobe.png)
+## **Task 3: Informació del Vídeo**
 
-Enunciat:
-*“Use docker-compose to launch both and make them interact.”*
+**Enunciat:** *"Create a new endpoint / feature which lets you read the video info and print at least 5 relevant data from the video."*
 
-Hem creat l'arxiu `docker-compose.yml` per aixecar tot l'entorn amb una sola comanda, assegurant que els volums i les xarxes estiguin ben configurats.
+Aquesta funcionalitat extreu les metadades del fitxer de vídeo que escollim com a entrada del procés.
 
-Per executar el projecte:
+- **Endpoint:** `POST /video/info`  
+- **Eina:** Utilitza `ffprobe` i JSON per la sortida.  
+- **Dades que es mostren a la sortida:**  
+  - Nom del contenidor.  
+  - Format del contenidor.  
+  - Durada en segons.  
+  - Còdec de vídeo i àudio.  
+  - Resolució i Frame Rate.  
+  - Bitrate.
 
-`docker-compose up --build`
+**Exemple d'ús i resultat JSON:**
+![](./assets/task3.png)
 
-![](./assets/image_compose_up.png)
+## **Task 4: Creació d'un Contenidor BBB**
 
-Podem comprovar el funcionament mitjançant Swagger:
+**Enunciat:** *"You’re going to create another endpoint in order to create a new BBB container. It will fulfill this requirements:*
 
-1.  Accedir a: [`http://localhost:8000/docs`](http://localhost:8000/docs)
-2.  Provar l'endpoint **/image/resize**:
-    * Pujar `test_image.jpg`.
-    * Resposta: `resized_test_image.jpg` amb resolució reduïda.
+- *Cut BBB into 20 seconds only video.*  
+- *Export BBB(20s) audio as AAC mono track.*  
+- *Export BBB(20s) audio in MP3 stereo w/ lower bitrate*  
+- *Export BBB(20s) audio in AC3 codec*
 
-3.  Provar l'endpoint **/image/compress-bw**:
-    * Pujar `test_image.jpg`.
-    * Resposta: `bw_test_image.jpg` (blanc i negre).
+ *Now package everything in a .mp4 with FFMPEG\!\!"*
 
-![](./assets/image_swagger_test.png)
+Aquesta tasca implica els següents passos:
 
-Aquests fitxers resultants es guarden físicament a la carpeta `shared_data` del host per verificació.
+- Tallar el vídeo als 20 segons de l’inici.  
+- Generar 3 pistes d'àudio amb les següents característiques:  
+1. AAC, mono.  
+2. MP3, stereo (menys bitrate)  
+3. AC3. 
 
-## **6. Instruccions d'Ús**
+- **Endpoint:** `POST /video/bbb-container`  
+- **Procés:**  
+  1. Retalla el vídeo als primers 20 segons (`-t 20`).  
+  2. Copia el vídeo (`-c:v copy`).  
+  3. Genera 3 pistes d'àudio a partir de l’àudio original fent servir `-map`.
 
-El projecte és compatible amb **Windows**, **macOS** i **Linux**.
+**Exemple d'ús:**
 
-1.  Obrir terminal a la carpeta `S2-MPEG4_and_MoreEndpoints`.
-2.  Executar: `docker-compose up --build`
-3.  Accedir a la documentació interactiva: [http://localhost:8000/docs](http://localhost:8000/docs)
-4.  Per aturar: `docker-compose down`
+Input:
+![](./assets/task4_input.png)
+Output:
+![](./assets/task4_output.png)
+Verificació amb ffprobe (4 streams totals):
+![](./assets/task4_ffprobe.png)
+
+## **Task 5: Comptador de Pistes (Tracks)**
+
+**Enunciat:** *"Create a new endpoint / feature which reads the tracks from an MP4 container, and it's able to say how many tracks does the container contains."*
+
+Un cop acabada la implementació d'aquest endpoint podrem comprovar de manera més còmoda si la Task 4 ha retornat un resultat correcte. 
+
+* **Endpoint:** `POST /video/count-tracks`  
+* **Funcionament:** Analitza el fitxer amb `ffprobe` i conta quants streams conté. Retorna el número total i el tipus i còdec de cadascun dels streams.
+
+**Exemple d'ús (analitzant el fitxer de la Task 4):**
+![](./assets/task5.png)
+
+## **Task 6: Visualització de Macroblocs i Vectors de Moviment**
+
+**Enunciat:** *"Create a new endpoint / feature which will output a video that will show the macroblocks and the motion vectors."*
+
+Amb aquesta funcionalitat podem veure com funciona la compressió de vídeo, entenent els vectors de moviment i com es comporten. En el nostre cas hem superposat aquests vectors de moviment sobre el vídeo original per poder tenir la imatge com a referència i entendre quines dades es poden extreure. 
+
+- **Endpoint:** `POST /video/motion-vectors`  
+- Hem fet servir el flag `-flags2 +export_mvs` combinat amb el filtre `codecview=mv=pf+bf+bb` per sobreposar les fletxes de moviment a la imatge.
+
+**Exemple d'ús:**
+
+Input:
+![](./assets/task6_input.png)
+Output:
+![](./assets/task6_output.png)
+**Resultat visual (Fotograma extret del vídeo output on es veuen els vectors de moviment):**
+![](./assets/task6_vectors.png)
+
+## **Task 7: Histograma YUV**
+
+**Enunciat:** *"Create a new endpoint / feature which will output a video that will show the YUV histogram."*
+
+En aquest cas hem implementat un generador d’histograma YUV en temps real que es superposa a la imatge. 
+
+- **Endpoint:** `POST /video/yuv-histogram`  
+- Fem servir un filtre (`filter_complex`) que:  
+  1. Divideix el vídeo en dos.  
+  2. Genera l'histograma d'una còpia.  
+  3. Superposa l'histograma damunt del vídeo original perquè es puguin veure simultàniament.
+
+**Exemple d'ús:**
+
+Input:
+![](./assets/task7_input.png)
+Output:
+![](./assets/task7_output.png)
+**Resultat visual (Fotograma extret del vídeo output on es veu l’histograma superposat):**
+![](./assets/task7_histogram.png)
+
+## **Instruccions d'Ús i Desplegament**
+
+Tot i que el procediment per executar el projecte amb les noves funcionalitats descrites és el mateix que el de la *Pràctica 1* hem de reconstruir la imatge per incloure aquestes noves funcionalitats. 
+
+1. **Netejar el docker compose existent**
+
+```
+docker-compose down
+```
+
+2. **Construir de nou el docker compose i aixecar el servei**
+
+```
+docker-compose up --build
+```
+
+3. **Accedir a la API** a través del navegador: [http://localhost:8000/docs](https://www.google.com/search?q=http://localhost:8000/docs). La nova secció **"S2 \- Video"** conté tots els endpoints descrits.   
+4. **Gestió de Fitxers:** Tots els vídeos processats es guardaran automàticament a la carpeta `shared_data` de la carpeta arrel amb el nom de sortida definit en cada cas. 
 
 ## **Autors**
 
-* **[Oriol Tutusaus - 267664]**
-* **[Alex Alastuey - 268167]**
+* **\[Oriol Tutusaus \- 267664\]**  
+* **\[Alex Alastuey \- 268167\]**
 
-SCAV – Pràctica 2 (Seminari 2)
+*SCAV – Seminari 2*
