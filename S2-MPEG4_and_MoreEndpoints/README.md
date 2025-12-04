@@ -178,13 +178,13 @@ Tot i que el procediment per executar el projecte amb les noves funcionalitats d
 1. **Netejar el docker compose existent**
 
 ```
-docker-compose down
+docker-compose down
 ```
 
 2. **Construir de nou el docker compose i aixecar el servei**
 
 ```
-docker-compose up --build
+docker-compose up --build
 ```
 
 3. **Accedir a la API** a través del navegador: [http://localhost:8000/docs](https://www.google.com/search?q=http://localhost:8000/docs). La nova secció **"S2 \- Video"** conté tots els endpoints descrits.   
