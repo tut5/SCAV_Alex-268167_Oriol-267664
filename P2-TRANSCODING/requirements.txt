@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+numpy
+scipy
+PyWavelets
+python-multipart
+requests
+docker
