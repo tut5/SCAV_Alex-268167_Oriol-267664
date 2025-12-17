@@ -3,206 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCAV Monster Hub</title>
+    <title>SCAV - Entregable Final</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0f172a',
+                        card: '#1e293b',
+                        accent: '#6366f1'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* Animacions suaus */
         .fade-in { animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        /* Scrollbar maco */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #1e293b; }
-        ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 4px; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-200 min-h-screen font-sans">
+<body class="bg-dark text-slate-300 min-h-screen font-sans antialiased selection:bg-accent selection:text-white">
 
-    <nav class="bg-slate-800 border-b border-slate-700 p-4 sticky top-0 z-50 shadow-2xl">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <i class="fas fa-dragon text-3xl text-indigo-500"></i>
-                <div>
-                    <h1 class="text-xl font-bold text-white tracking-wide">SCAV MONSTER HUB</h1>
-                    <p class="text-xs text-slate-400">Integració P1 + S2 + P2</p>
-                </div>
+    <nav class="bg-card/50 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-lg font-bold text-white tracking-widest uppercase">SCAV (S1 + P1 + S2 + P2)</h1>
             </div>
-            <div class="flex space-x-2">
-                <span class="px-3 py-1 bg-indigo-900/50 text-indigo-300 text-xs rounded-full border border-indigo-700">API v3.0</span>
+            <div class="text-right">
+                <p class="text-xs font-medium text-white">Alex (268167) & Oriol (267664)</p>
             </div>
         </div>
     </nav>
 
     <div class="container mx-auto px-4 py-8 max-w-6xl">
 
-        <div class="grid grid-cols-3 gap-4 mb-8">
-            <button onclick="switchTab('p1')" id="btn-p1" class="tab-btn p-4 rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-transparent transition-all duration-200 flex flex-col items-center group">
-                <i class="fas fa-calculator text-2xl mb-2 text-cyan-400 group-hover:scale-110 transition"></i>
-                <span class="font-bold">Pràctica 1</span>
-                <span class="text-xs text-slate-500">Bàsics (Color, RLE, DCT)</span>
+        <div class="grid grid-cols-4 gap-2 mb-8 bg-card p-1 rounded-lg border border-slate-800">
+            <button onclick="switchTab('s1')" id="btn-s1" class="tab-btn py-3 px-4 rounded-md text-sm font-medium transition-all duration-200 hover:text-white flex items-center justify-center gap-2">
+                <i class="fas fa-calculator text-xs"></i> Seminari 1
             </button>
-            <button onclick="switchTab('s2')" id="btn-s2" class="tab-btn p-4 rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-transparent transition-all duration-200 flex flex-col items-center group">
-                <i class="fas fa-photo-video text-2xl mb-2 text-pink-400 group-hover:scale-110 transition"></i>
-                <span class="font-bold">Seminari 2</span>
-                <span class="text-xs text-slate-500">Processament Vídeo/Imatge</span>
+            <button onclick="switchTab('p1')" id="btn-p1" class="tab-btn py-3 px-4 rounded-md text-sm font-medium transition-all duration-200 hover:text-white flex items-center justify-center gap-2">
+                <i class="fas fa-cube text-xs"></i> Pràctica 1
             </button>
-            <button onclick="switchTab('p2')" id="btn-p2" class="tab-btn p-4 rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-transparent transition-all duration-200 flex flex-col items-center group">
-                <i class="fas fa-server text-2xl mb-2 text-emerald-400 group-hover:scale-110 transition"></i>
-                <span class="font-bold">Pràctica 2</span>
-                <span class="text-xs text-slate-500">Transcodificació i Ladder</span>
+            <button onclick="switchTab('s2')" id="btn-s2" class="tab-btn py-3 px-4 rounded-md text-sm font-medium transition-all duration-200 hover:text-white flex items-center justify-center gap-2">
+                <i class="fas fa-film text-xs"></i> Seminari 2
+            </button>
+            <button onclick="switchTab('p2')" id="btn-p2" class="tab-btn py-3 px-4 rounded-md text-sm font-medium transition-all duration-200 hover:text-white flex items-center justify-center gap-2">
+                <i class="fas fa-network-wired text-xs"></i> Pràctica 2
             </button>
         </div>
 
-        <div id="tab-p1" class="tab-content hidden fade-in space-y-6">
-            <h2 class="text-2xl font-bold text-cyan-400 mb-4 border-b border-slate-700 pb-2">Eines Matemàtiques</h2>
-            
+        <div id="tab-s1" class="tab-content hidden fade-in">
             <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-                    <h3 class="font-bold text-lg mb-4 text-white"><i class="fas fa-palette mr-2"></i>Conversor de Color</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <form onsubmit="handleP1(event, '/converter/rgb-to-yuv', 'rgbRes')" class="space-y-2">
-                            <p class="text-sm text-slate-400">RGB a YUV</p>
-                            <input type="number" placeholder="R" name="r" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-sm" required>
-                            <input type="number" placeholder="G" name="g" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-sm" required>
-                            <input type="number" placeholder="B" name="b" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-sm" required>
-                            <button class="w-full bg-cyan-600 hover:bg-cyan-500 text-white p-2 rounded text-sm">Convertir</button>
-                        </form>
-                        <div id="rgbRes" class="bg-slate-900 p-2 rounded text-xs font-mono text-green-400 overflow-auto">Resultat...</div>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-                    <h3 class="font-bold text-lg mb-4 text-white"><i class="fas fa-compress-arrows-alt mr-2"></i>Run-Length Encoding</h3>
-                    <form onsubmit="handleP1List(event, '/converter/rle', 'rleRes')" class="space-y-3">
-                        <input type="text" id="rleInput" placeholder="Ex: 1,1,1,2,2,3" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-sm">
-                        <button class="w-full bg-cyan-600 hover:bg-cyan-500 text-white p-2 rounded text-sm">Comprimir (RLE)</button>
+                <div class="bg-card p-6 rounded-lg border border-slate-800">
+                    <h3 class="text-sm font-bold text-white uppercase mb-4 tracking-wide border-b border-slate-700 pb-2">Conversió Color (RGB > YUV)</h3>
+                    <form onsubmit="handleP1(event, '/converter/rgb-to-yuv', 'rgbRes')" class="grid grid-cols-3 gap-3 mb-4">
+                        <input type="number" placeholder="R" name="r" class="bg-dark border border-slate-700 rounded px-3 py-2 text-sm focus:border-accent focus:outline-none transition" required>
+                        <input type="number" placeholder="G" name="g" class="bg-dark border border-slate-700 rounded px-3 py-2 text-sm focus:border-accent focus:outline-none transition" required>
+                        <input type="number" placeholder="B" name="b" class="bg-dark border border-slate-700 rounded px-3 py-2 text-sm focus:border-accent focus:outline-none transition" required>
+                        <button class="col-span-3 bg-slate-700 hover:bg-accent text-white py-2 rounded text-sm font-medium transition-colors">Calcula</button>
                     </form>
-                    <div id="rleRes" class="mt-4 bg-slate-900 p-2 rounded text-xs font-mono text-green-400 overflow-auto">Resultat...</div>
+                    <div id="rgbRes" class="text-xs font-mono text-slate-400 min-h-[1.5rem] flex items-center">Resultat pendent...</div>
                 </div>
 
-                <div class="bg-slate-800 p-6 rounded-lg border border-slate-700 md:col-span-2">
-                    <h3 class="font-bold text-lg mb-4 text-white"><i class="fas fa-th mr-2"></i>Operacions Matriu (DCT / Serpentina)</h3>
-                    <div class="flex gap-4">
-                        <div class="flex-1">
-                            <textarea id="matrixInput" rows="5" class="w-full bg-slate-900 border border-slate-600 rounded p-2 font-mono text-sm" placeholder="[[1, 2, 3], [4, 5, 6], [7, 8, 9]]"></textarea>
-                        </div>
-                        <div class="flex-1 space-y-2">
-                            <button onclick="handleP1Matrix('/scanner/serpentine', 'matRes')" class="w-full bg-slate-700 hover:bg-slate-600 p-2 rounded text-sm text-left"><i class="fas fa-wave-square mr-2"></i>Escàner Serpentina</button>
-                            <button onclick="handleP1Matrix('/converter/dct/forward', 'matRes')" class="w-full bg-slate-700 hover:bg-slate-600 p-2 rounded text-sm text-left"><i class="fas fa-arrow-right mr-2"></i>DCT Forward</button>
-                            <button onclick="handleP1Matrix('/converter/dct/inverse', 'matRes')" class="w-full bg-slate-700 hover:bg-slate-600 p-2 rounded text-sm text-left"><i class="fas fa-arrow-left mr-2"></i>DCT Inverse</button>
-                        </div>
-                    </div>
-                    <div id="matRes" class="mt-4 bg-slate-900 p-2 rounded text-xs font-mono text-green-400 overflow-auto max-h-40">Resultat matriu...</div>
+                <div class="bg-card p-6 rounded-lg border border-slate-800">
+                    <h3 class="text-sm font-bold text-white uppercase mb-4 tracking-wide border-b border-slate-700 pb-2">Compressió RLE</h3>
+                    <form onsubmit="handleP1List(event, '/converter/rle', 'rleRes')" class="flex gap-3 mb-4">
+                        <input type="text" id="rleInput" placeholder="Ex: 1,1,2,2,3..." class="flex-1 bg-dark border border-slate-700 rounded px-3 py-2 text-sm focus:border-accent focus:outline-none transition">
+                        <button class="bg-slate-700 hover:bg-accent text-white px-4 py-2 rounded text-sm font-medium transition-colors">Comprimir</button>
+                    </form>
+                    <div id="rleRes" class="text-xs font-mono text-slate-400 break-all">Resultat pendent...</div>
                 </div>
             </div>
         </div>
 
-        <div id="tab-s2" class="tab-content hidden fade-in">
-            <h2 class="text-2xl font-bold text-pink-400 mb-4 border-b border-slate-700 pb-2">Processador de Mitjans</h2>
-            
-            <div class="bg-slate-800 rounded-xl shadow-xl overflow-hidden border border-slate-700">
-                <div class="p-8">
-                    <div class="border-2 border-dashed border-slate-600 rounded-lg p-6 text-center hover:border-pink-500 transition cursor-pointer relative mb-6">
-                        <input type="file" id="s2-file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="updateFileName(this, 's2-filename')">
-                        <i class="fas fa-cloud-upload-alt text-4xl text-slate-500 mb-2"></i>
-                        <p class="text-slate-400">1. Selecciona el teu fitxer (Imatge o Vídeo)</p>
-                        <p id="s2-filename" class="text-sm text-pink-400 mt-2 font-mono"></p>
+        <div id="tab-p1" class="tab-content hidden fade-in">
+            <div class="bg-card p-6 rounded-lg border border-slate-800">
+                <h3 class="text-sm font-bold text-white uppercase mb-4 tracking-wide border-b border-slate-700 pb-2">Operacions Matricials (DCT / ZigZag)</h3>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="w-full md:w-1/2">
+                        <label class="text-xs text-slate-500 mb-2 block">Matriu d'Entrada (Format JSON)</label>
+                        <textarea id="matrixInput" rows="5" class="w-full bg-dark border border-slate-700 rounded p-3 font-mono text-xs focus:border-accent focus:outline-none transition resize-none" placeholder="[[1, 2, 3], [4, 5, 6], [7, 8, 9]]"></textarea>
                     </div>
+                    <div class="w-full md:w-1/2 flex flex-col gap-2 justify-end">
+                        <button onclick="handleP1Matrix('/scanner/serpentine', 'matRes')" class="w-full bg-slate-800 border border-slate-700 hover:border-accent text-slate-300 py-2 px-3 rounded text-sm text-left transition flex justify-between items-center group">
+                            <i class="fas fa-wave-square mr-2"></i> Escàner Serpentina
+                        </button>
+                        <button onclick="handleP1Matrix('/converter/dct/forward', 'matRes')" class="w-full bg-slate-800 border border-slate-700 hover:border-accent text-slate-300 py-2 px-3 rounded text-sm text-left transition flex justify-between items-center group">
+                            <i class="fas fa-arrow-right mr-2"></i> DCT Forward
+                        </button>
+                        <button onclick="handleP1Matrix('/converter/dct/inverse', 'matRes')" class="w-full bg-slate-800 border border-slate-700 hover:border-accent text-slate-300 py-2 px-3 rounded text-sm text-left transition flex justify-between items-center group">
+                            <i class="fas fa-arrow-left mr-2"></i> DCT Inverse
+                        </button>
+                    </div>
+                </div>
+                <div id="matRes" class="mt-4 p-3 bg-dark rounded border border-slate-800 text-xs font-mono text-green-500 overflow-x-auto">Resultat matriu...</div>
+            </div>
+        </div>
 
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm text-slate-400 mb-2">2. Tria Operació</label>
-                            <select id="s2-op" onchange="updateS2Inputs()" class="w-full bg-slate-900 border border-slate-600 rounded p-3 text-white">
-                                <option value="info">Obtenir Info (Metadades)</option>
-                                <option value="resize_video">Redimensionar Vídeo</option>
-                                <option value="resize_image">Redimensionar Imatge</option>
-                                <option value="chroma">Submostreig de Croma</option>
-                                <option value="bw">Imatge en Blanc i Negre</option>
-                                <option value="bbb">Crear Contenidor BBB</option>
-                                <option value="tracks">Comptar Pistes (Tracks)</option>
-                                <option value="motion">Veure Vectors de Moviment</option>
-                                <option value="hist">Veure Histograma YUV</option>
-                            </select>
-                        </div>
-
-                        <div id="s2-extras" class="space-y-4">
-                            <div id="inp-dims" class="hidden grid grid-cols-2 gap-2">
-                                <input type="number" id="s2-w" placeholder="Amplada (px)" class="bg-slate-900 border border-slate-600 rounded p-3">
-                                <input type="number" id="s2-h" placeholder="Alçada (px)" class="bg-slate-900 border border-slate-600 rounded p-3">
+        <div id="tab-s2" class="tab-content hidden fade-in">
+            <div class="bg-card border border-slate-800 rounded-lg overflow-hidden">
+                <div class="p-8">
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        
+                        <div class="w-full md:w-1/3 space-y-6">
+                            <div class="relative group cursor-pointer" onclick="document.getElementById('s2-file').click()">
+                                <input type="file" id="s2-file" class="hidden" onchange="updateFileName(this, 's2-filename')">
+                                <div class="bg-dark border border-slate-700 border-dashed rounded p-4 text-center group-hover:border-accent transition-colors flex flex-col items-center">
+                                    <i class="fas fa-cloud-upload-alt text-4xl text-slate-500 mb-2"></i>
+                                    <p class="text-slate-400 text-sm font-bold">Clica per seleccionar un fitxer</p>
+                                    <p id="s2-filename" class="text-xs text-slate-500 mt-2 font-mono truncate">Cap arxiu seleccionat</p>
+                                </div>
                             </div>
-                            <div id="inp-chroma" class="hidden">
-                                <select id="s2-chroma-val" class="w-full bg-slate-900 border border-slate-600 rounded p-3">
-                                    <option value="yuv420p">YUV 4:2:0</option>
-                                    <option value="yuv422p">YUV 4:2:2</option>
-                                    <option value="yuv444p">YUV 4:4:4</option>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">2. Què vols fer?</label>
+                                <select id="s2-op" onchange="updateS2Inputs()" class="w-full bg-dark border border-slate-700 rounded p-2 text-sm text-slate-300 focus:border-accent focus:outline-none">
+                                    <option value="info">Veure Metadata (Info)</option>
+                                    <option value="resize_video">Redimensionar Vídeo</option>
+                                    <option value="resize_image">Redimensionar Imatge</option>
+                                    <option value="chroma">Submostreig Croma</option>
+                                    <option value="bw">Passar a Blanc i Negre</option>
+                                    <option value="bbb">Tallar BBB (Container)</option>
+                                    <option value="tracks">Comptar Tracks</option>
+                                    <option value="motion">Vectors de Moviment</option>
+                                    <option value="hist">Histograma YUV</option>
                                 </select>
                             </div>
+
+                            <div id="s2-extras" class="space-y-4">
+                                <div id="inp-dims" class="hidden grid grid-cols-2 gap-2">
+                                    <input type="number" id="s2-w" placeholder="Amplada (px)" class="bg-dark border border-slate-700 rounded p-2 text-sm">
+                                    <input type="number" id="s2-h" placeholder="Alçada (px)" class="bg-dark border border-slate-700 rounded p-2 text-sm">
+                                </div>
+                                <div id="inp-chroma" class="hidden">
+                                    <select id="s2-chroma-val" class="w-full bg-dark border border-slate-700 rounded p-2 text-sm">
+                                        <option value="yuv420p">YUV 4:2:0</option>
+                                        <option value="yuv422p">YUV 4:2:2</option>
+                                        <option value="yuv444p">YUV 4:4:4</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button onclick="runS2()" class="w-full mt-6 bg-accent hover:bg-indigo-500 py-3 rounded-lg font-bold shadow-lg transition flex justify-center items-center text-white text-sm">
+                                <span id="s2-btn-text">EXECUTAR</span>
+                                <i id="s2-spinner" class="fas fa-circle-notch fa-spin ml-2 hidden"></i>
+                            </button>
                         </div>
-                    </div>
 
-                    <button onclick="runS2()" class="w-full mt-6 bg-pink-600 hover:bg-pink-500 py-3 rounded-lg font-bold shadow-lg transition flex justify-center items-center">
-                        <span id="s2-btn-text">EXECUTAR PROCÉS</span>
-                        <i id="s2-spinner" class="fas fa-circle-notch fa-spin ml-2 hidden"></i>
-                    </button>
-                </div>
-
-                <div id="s2-result-area" class="hidden bg-slate-900 p-6 border-t border-slate-700">
-                    <h3 class="text-white font-bold mb-2">Resultat:</h3>
-                    
-                    <pre id="s2-json" class="hidden text-xs text-green-400 font-mono overflow-auto max-h-60 bg-black/50 p-4 rounded"></pre>
-                    
-                    <div id="s2-file-res" class="hidden text-center">
-                        <p class="text-slate-400 mb-2">Fitxer generat amb èxit</p>
-                        <a id="s2-download" href="#" class="inline-block bg-green-600 hover:bg-green-500 text-white px-6 py-2 rounded font-bold transition">
-                            <i class="fas fa-download mr-2"></i> Descarregar / Veure
-                        </a>
+                        <div class="w-full md:w-2/3 bg-dark rounded border border-slate-800 min-h-[300px] relative">
+                            <div id="s2-result-area" class="hidden p-4">
+                                <h3 class="text-white font-bold mb-2 text-xs uppercase">Terminal de sortida:</h3>
+                                <pre id="s2-json" class="hidden text-xs text-green-400 font-mono overflow-auto max-h-60 bg-black/50 p-4 rounded"></pre>
+                                <div id="s2-file-res" class="hidden text-center mt-4">
+                                    <p class="text-slate-400 mb-2 text-xs">Arxiu processat correctament</p>
+                                    <a id="s2-download" href="#" class="inline-block bg-green-600 hover:bg-green-500 text-white px-6 py-2 rounded font-bold transition text-xs">
+                                        <i class="fas fa-download mr-2"></i> Descarregar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="tab-p2" class="tab-content hidden fade-in">
-            <h2 class="text-2xl font-bold text-emerald-400 mb-4 border-b border-slate-700 pb-2">Monster Transcoder</h2>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
-                    <h3 class="text-xl font-bold text-white mb-4"><i class="fas fa-random mr-2"></i>Conversor de Còdecs</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                
+                <div class="bg-card p-6 rounded-lg border border-slate-800">
+                    <h3 class="text-sm font-bold text-white uppercase mb-6 tracking-wide flex items-center gap-2">
+                        <i class="fas fa-random text-slate-500"></i> Transcodificació
+                    </h3>
                     <form id="transcodeForm" class="space-y-4">
-                        <input type="file" id="p2-file" class="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-emerald-900 file:text-emerald-400 hover:file:bg-emerald-800">
                         
-                        <div class="grid grid-cols-2 gap-2">
-                            <label class="cursor-pointer bg-slate-700 p-3 rounded text-center hover:bg-emerald-900 has-[:checked]:bg-emerald-600 has-[:checked]:text-white transition">
-                                <input type="radio" name="codec" value="vp8" checked class="hidden"> VP8
-                            </label>
-                            <label class="cursor-pointer bg-slate-700 p-3 rounded text-center hover:bg-emerald-900 has-[:checked]:bg-emerald-600 has-[:checked]:text-white transition">
-                                <input type="radio" name="codec" value="vp9" class="hidden"> VP9
-                            </label>
-                            <label class="cursor-pointer bg-slate-700 p-3 rounded text-center hover:bg-emerald-900 has-[:checked]:bg-emerald-600 has-[:checked]:text-white transition">
-                                <input type="radio" name="codec" value="h265" class="hidden"> H.265
-                            </label>
-                            <label class="cursor-pointer bg-slate-700 p-3 rounded text-center hover:bg-emerald-900 has-[:checked]:bg-emerald-600 has-[:checked]:text-white transition">
-                                <input type="radio" name="codec" value="av1" class="hidden"> AV1
-                            </label>
+                        <div class="relative group cursor-pointer mb-4" onclick="document.getElementById('p2-file').click()">
+                            <input type="file" id="p2-file" class="hidden" onchange="updateFileName(this, 'p2-transcode-name')">
+                            <div class="bg-dark border border-slate-700 border-dashed rounded p-4 text-center group-hover:border-accent transition-colors flex flex-col items-center">
+                                <i class="fas fa-video text-slate-500 mb-2"></i>
+                                <p class="text-slate-400 text-xs font-bold">Clica per seleccionar vídeo</p>
+                                <p id="p2-transcode-name" class="text-[10px] text-emerald-400 mt-1 font-mono truncate">Cap arxiu seleccionat</p>
+                            </div>
                         </div>
 
-                        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 py-3 rounded font-bold transition">Transcodificar</button>
+                        <div class="grid grid-cols-4 gap-2">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="codec" value="vp8" checked class="peer hidden">
+                                <div class="text-center py-2 bg-dark border border-slate-700 rounded text-xs text-slate-400 peer-checked:bg-accent peer-checked:text-white peer-checked:border-accent transition">VP8</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="codec" value="vp9" class="peer hidden">
+                                <div class="text-center py-2 bg-dark border border-slate-700 rounded text-xs text-slate-400 peer-checked:bg-accent peer-checked:text-white peer-checked:border-accent transition">VP9</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="codec" value="h265" class="peer hidden">
+                                <div class="text-center py-2 bg-dark border border-slate-700 rounded text-xs text-slate-400 peer-checked:bg-accent peer-checked:text-white peer-checked:border-accent transition">H.265</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="codec" value="av1" class="peer hidden">
+                                <div class="text-center py-2 bg-dark border border-slate-700 rounded text-xs text-slate-400 peer-checked:bg-accent peer-checked:text-white peer-checked:border-accent transition">AV1</div>
+                            </label>
+                        </div>
+                        <button type="submit" class="w-full bg-slate-700 hover:bg-slate-600 text-white py-2 rounded text-sm font-medium transition">Convertir Video</button>
                     </form>
                     <div id="p2-transcode-res" class="hidden mt-4 text-center">
-                        <a id="p2-dl-link" href="#" class="text-emerald-400 underline font-bold">Descarregar Resultat</a>
+                        <a id="p2-dl-link" href="#" class="text-green-400 underline font-mono text-xs">Descarregar Resultat</a>
                     </div>
                 </div>
 
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
-                    <h3 class="text-xl font-bold text-white mb-4"><i class="fas fa-layer-group mr-2"></i>Encoding Ladder</h3>
-                    <p class="text-sm text-slate-400 mb-4">Genera versions en 1080p, 720p i 480p automàticament.</p>
-                    
-                    <form id="ladderForm">
-                        <input type="file" id="p2-ladder-file" class="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-emerald-900 file:text-emerald-400 hover:file:bg-emerald-800 mb-4">
-                        <button type="submit" class="w-full bg-slate-600 hover:bg-slate-500 py-3 rounded font-bold transition">Generar Ladder</button>
-                    </form>
-
-                    <div id="p2-ladder-res" class="hidden mt-4 space-y-2">
+                <div class="bg-card p-6 rounded-lg border border-slate-800">
+                    <h3 class="text-sm font-bold text-white uppercase mb-6 tracking-wide flex items-center gap-2">
+                        <i class="fas fa-layer-group text-slate-500"></i> Generar Ladder
+                    </h3>
+                    <div class="bg-dark/50 p-4 rounded mb-4">
+                        <p class="text-[10px] text-slate-500 mb-2">TARGETS</p>
+                        <div class="flex gap-2">
+                            <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-300 border border-slate-700">1080p</span>
+                            <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-300 border border-slate-700">720p</span>
+                            <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-300 border border-slate-700">480p</span>
                         </div>
+                    </div>
+                    
+                    <form id="ladderForm" class="space-y-4">
+                        
+                        <div class="relative group cursor-pointer mb-4" onclick="document.getElementById('p2-ladder-file').click()">
+                            <input type="file" id="p2-ladder-file" class="hidden" onchange="updateFileName(this, 'p2-ladder-name')">
+                            <div class="bg-dark border border-slate-700 border-dashed rounded p-3 text-center group-hover:border-accent transition-colors flex flex-col items-center justify-center">
+                                <i class="fas fa-layer-group text-slate-500 mb-1"></i>
+                                <p class="text-slate-400 text-xs font-bold">Clica per seleccionar arxiu</p>
+                                <p id="p2-ladder-name" class="text-[10px] text-emerald-400 mt-1 font-mono truncate">Cap arxiu seleccionat</p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-slate-700 hover:bg-slate-600 text-white py-2 rounded text-sm font-medium transition">Generar Ladder</button>
+                    </form>
+                    <div id="p2-ladder-res" class="hidden mt-4 space-y-2"></div>
                 </div>
             </div>
         </div>
@@ -211,40 +253,76 @@
 
     <script>
         // --- NAVEGACIÓ ---
+        const tabs = ['s1', 'p1', 's2', 'p2'];
+
         function switchTab(id) {
+            console.log("Debug: Canviant a pestanya " + id);
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('border-white', 'bg-slate-700'));
-            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-accent', 'text-white', 'shadow-lg', 'shadow-indigo-500/20');
+                btn.classList.add('text-slate-400', 'hover:bg-slate-800');
+            });
             document.getElementById(`tab-${id}`).classList.remove('hidden');
             const btn = document.getElementById(`btn-${id}`);
-            
-            // Colors per tab
-            if(id === 'p1') btn.classList.add('border-cyan-500', 'bg-slate-700');
-            if(id === 's2') btn.classList.add('border-pink-500', 'bg-slate-700');
-            if(id === 'p2') btn.classList.add('border-emerald-500', 'bg-slate-700');
+            if(btn) {
+                btn.classList.remove('text-slate-400', 'hover:bg-slate-800');
+                btn.classList.add('bg-accent', 'text-white', 'shadow-lg', 'shadow-indigo-500/20');
+            }
         }
 
-        // Init
-        switchTab('p1');
+        switchTab('s1');
 
+        // FUNCIÓ ACTUALITZAR NOM FITXER
         function updateFileName(input, targetId) {
-            if(input.files[0]) document.getElementById(targetId).textContent = input.files[0].name;
+            if(input.files[0]) {
+                const name = input.files[0].name;
+                console.log("Fitxer seleccionat:", name);
+                const label = document.getElementById(targetId);
+                label.textContent = name;
+                label.classList.remove('text-slate-500');
+                label.classList.add('text-emerald-400'); // Verd matrix
+            }
         }
 
-        // --- LÒGICA P1 (Bàsics) ---
+        // --- FETCH HELPER ---
+        async function postData(url, data, isJson = true) {
+            console.log("Enviant request a:", url);
+            const options = { method: 'POST' };
+            if (isJson) {
+                options.headers = { 'Content-Type': 'application/json' };
+                options.body = JSON.stringify(data);
+            } else {
+                options.body = data;
+            }
+            
+            const res = await fetch(url, options);
+            if (!res.ok) {
+                const txt = await res.text();
+                throw new Error(`Error ${res.status}: ${txt}`);
+            }
+            
+            const contentType = res.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                return res.json();
+            } else {
+                return res.blob();
+            }
+        }
+
+        // --- HANDLERS (Iguals que la versió que funcionava) ---
+
         async function handleP1(e, endpoint, resId) {
             e.preventDefault();
+            console.log("Calculant color...");
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData.entries());
-            
-            // Convert strings to numbers
             for (let key in data) data[key] = Number(data[key]);
-
             await sendJsonP1(endpoint, data, resId);
         }
 
         async function handleP1List(e, endpoint, resId) {
             e.preventDefault();
+            console.log("Fent RLE...");
             const raw = document.getElementById('rleInput').value;
             const data = { data: raw.split(',').map(Number) };
             await sendJsonP1(endpoint, data, resId);
@@ -252,6 +330,7 @@
 
         async function handleP1Matrix(endpoint, resId) {
             try {
+                console.log("Processant matriu...");
                 const raw = document.getElementById('matrixInput').value;
                 const matrix = JSON.parse(raw);
                 await sendJsonP1(endpoint, { matrix: matrix }, resId);
@@ -276,12 +355,11 @@
             }
         }
 
-        // --- LÒGICA S2 (The Monster) ---
-        function updateS2Inputs() {
+        function toggleS2Fields() {
             const op = document.getElementById('s2-op').value;
+            console.log("Canvi d'opció S2:", op);
             document.getElementById('inp-dims').classList.add('hidden');
             document.getElementById('inp-chroma').classList.add('hidden');
-
             if (op === 'resize_video' || op === 'resize_image') {
                 document.getElementById('inp-dims').classList.remove('hidden');
             }
@@ -292,15 +370,13 @@
 
         async function runS2() {
             const fileInput = document.getElementById('s2-file');
-            if (!fileInput.files[0]) return alert("Selecciona un fitxer");
+            if (!fileInput.files[0]) return alert("Has de seleccionar un arxiu!");
 
             const op = document.getElementById('s2-op').value;
             const formData = new FormData();
             formData.append('file', fileInput.files[0]);
 
             let url = "";
-            
-            // Mapping selection to Endpoints
             switch(op) {
                 case 'info': url = "/video/info"; break;
                 case 'resize_video': 
@@ -319,7 +395,8 @@
                 case 'hist': url = "/video/yuv-histogram"; break;
             }
 
-            // UI Loading
+            console.log("Cridant API a: " + url); 
+
             document.getElementById('s2-spinner').classList.remove('hidden');
             document.getElementById('s2-result-area').classList.add('hidden');
             document.getElementById('s2-json').classList.add('hidden');
@@ -327,8 +404,6 @@
 
             try {
                 const res = await fetch(url, { method: 'POST', body: formData });
-                
-                // Detectar si es archivo o JSON
                 const contentType = res.headers.get("content-type");
                 
                 if (contentType && contentType.indexOf("application/json") !== -1) {
@@ -336,32 +411,24 @@
                     const pre = document.getElementById('s2-json');
                     pre.textContent = JSON.stringify(json, null, 2);
                     pre.classList.remove('hidden');
-                    
-                    // Si el JSON tiene 'output_location' también podemos intentar descargarlo
-                    if(json.output_location && !json.error) {
-                        // Opcional: mostrar botón si el JSON devuelve una ruta
-                    }
-
                 } else {
-                    // Es un Blob (Archivo)
                     const blob = await res.blob();
                     const dlUrl = window.URL.createObjectURL(blob);
                     const link = document.getElementById('s2-download');
                     link.href = dlUrl;
-                    link.download = "resultat_scav." + (blob.type.split('/')[1] || 'dat');
+                    let ext = blob.type.split('/')[1] || 'dat';
+                    link.download = "resultat." + ext;
                     document.getElementById('s2-file-res').classList.remove('hidden');
                 }
-                
                 document.getElementById('s2-result-area').classList.remove('hidden');
-
             } catch (err) {
+                console.error(err);
                 alert("Error: " + err.message);
             } finally {
                 document.getElementById('s2-spinner').classList.add('hidden');
             }
         }
 
-        // --- LÒGICA P2 (Transcoding) ---
         document.getElementById('transcodeForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const file = document.getElementById('p2-file').files[0];
@@ -372,10 +439,10 @@
             fd.append('file', file);
             fd.append('codec', codec);
             
-            // Loading simple con texto botón
             const btn = e.target.querySelector('button');
             const originalText = btn.innerText;
-            btn.innerText = "Processant...";
+            btn.innerText = "Processant... (Espera)";
+            console.log("Transcodificant a " + codec + "...");
             
             try {
                 const res = await fetch('/api/transcode', { method: 'POST', body: fd });
@@ -386,9 +453,10 @@
                 
                 const link = document.getElementById('p2-dl-link');
                 link.href = url;
-                link.download = `video_${codec}.mkv`; // o detectar ext
+                link.download = `video_${codec}.mkv`;
                 document.getElementById('p2-transcode-res').classList.remove('hidden');
             } catch(err) {
+                console.log(err);
                 alert(err.message);
             } finally {
                 btn.innerText = originalText;
@@ -404,25 +472,31 @@
             fd.append('file', file);
 
             const btn = e.target.querySelector('button');
-            btn.innerText = "Generant Ladder (paciència)...";
+            btn.innerText = "Generant...";
+            console.log("Generant ladder...");
 
             try {
                 const res = await fetch('/api/ladder', { method: 'POST', body: fd });
-                const json = await res.json();
+                const text = await res.text();
+                let json;
+                try { json = JSON.parse(text); } catch { json = { error: "No JSON", raw: text }; }
                 
                 const container = document.getElementById('p2-ladder-res');
                 container.innerHTML = "";
                 
                 if(json.download_links) {
+                    console.log("Links rebuts:", json.download_links);
                     json.download_links.forEach(link => {
                         const a = document.createElement('a');
                         a.href = link;
-                        a.className = "block bg-slate-700 p-2 rounded text-emerald-400 hover:bg-slate-600";
+                        a.className = "block bg-slate-700 p-2 rounded text-emerald-400 hover:bg-slate-600 text-xs truncate";
                         a.innerText = "Descarregar: " + link.split('/').pop();
                         a.target = "_blank";
                         container.appendChild(a);
                     });
                     container.classList.remove('hidden');
+                } else {
+                    console.log("Resposta:", json);
                 }
             } catch(err) {
                 alert(err.message);
@@ -430,7 +504,6 @@
                 btn.innerText = "Generar Ladder";
             }
         });
-
     </script>
 </body>
 </html>
