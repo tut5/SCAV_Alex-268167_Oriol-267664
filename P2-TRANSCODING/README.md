@@ -47,11 +47,11 @@ Aquest endpoint ens permet penjar un vídeo a la nostra API i transcodificar-lo 
 
 **Exemple d'ús:**
 Input:
-![](./assets/task1_input)
+![](./assets/task1_input.png)
 Output:
-![](./assets/task1_output)
+![](./assets/task1_output.png)
 Verificació amb ffprobe:
-![](./assets/task1_verify)
+![](./assets/task1_verify.png)
 
 ---
 
@@ -74,11 +74,11 @@ Per no repetir codi, hem creat un bucle que recorre la llista de resolucions que
 
 **Exemple d’ús:**
 Input:
-![](./assets/task2_input)
+![](./assets/task2_input.png)
 Output:
-![](./assets/task2_output)
+![](./assets/task2_output.png)
 Verificació amb ffprobe a una de les resolucions generades:
-![](./assets/task2_verify)
+![](./assets/task2_verify.png)
 
 
 ---
@@ -129,7 +129,7 @@ app.mount("/downloads", StaticFiles(directory=SHARED_FOLDER), name="downloads")
 ```
 
 Imatge de la pestanya de la Practica 2:
-![](./assets/task3_GUI)
+![](./assets/task3_GUI.png)
 
 ## Task 4: Millores de la IA i implementacio de unittest
 
@@ -146,15 +146,34 @@ S'ha utilitzat IA per analitzar i refactoritzar el codi, implementant les següe
 
 ---
 
-### 🧪 Execució dels Tests Unitaris
+### Execució dels Tests Unitaris
 
-Per poder comprovar els unittest cal tenir el docker actiu i executar el següent comandament:
+Per poder comprovar els unittest s'ha executar el següent comandament:
 ```
 docker-compose exec api python -m unittest app.test_logic
 ```
 Comprovacio dels unittest:
-![](./assets/task4_unittest)
+![](./assets/task4_unittest.png)
 
+## **Instruccions d'Ús i Desplegament**
+
+El procediment per aixecar el docker es el mateix que en les anteriors practiques, tot i que amb un petit canvi al inserir la GUI. 
+
+1. **Netejar el docker compose existent**
+
+```
+docker-compose down
+```
+
+2. **Construir de nou el docker compose i aixecar el servei**
+
+```
+docker-compose up --build
+```
+
+3. **Accedir a la API** a través del navegador: [http://localhost:8000/docs](https://www.google.com/search?q=http://localhost:8000/docs). La nova secció **"P2 \- Transcoding"** conté tots els endpoints descrits. Per accedir a la GUI s'haura d'introduir la següent direcció [http://localhost:8000]
+
+4. **Gestió de Fitxers:** Tots els vídeos processats es guardaran automàticament a la carpeta `shared_data` de la carpeta arrel amb el nom de sortida definit en cada cas. 
 
 ## **Autors**
 
