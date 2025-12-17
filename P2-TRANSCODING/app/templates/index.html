@@ -252,11 +252,9 @@
     </div>
 
     <script>
-        // --- NAVEGACIÓ ---
         const tabs = ['s1', 'p1', 's2', 'p2'];
 
         function switchTab(id) {
-            console.log("Debug: Canviant a pestanya " + id);
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('bg-accent', 'text-white', 'shadow-lg', 'shadow-indigo-500/20');
@@ -272,21 +270,17 @@
 
         switchTab('s1');
 
-        // FUNCIÓ ACTUALITZAR NOM FITXER
         function updateFileName(input, targetId) {
             if(input.files[0]) {
                 const name = input.files[0].name;
-                console.log("Fitxer seleccionat:", name);
                 const label = document.getElementById(targetId);
                 label.textContent = name;
                 label.classList.remove('text-slate-500');
-                label.classList.add('text-emerald-400'); // Verd matrix
+                label.classList.add('text-emerald-400');
             }
         }
 
-        // --- FETCH HELPER ---
         async function postData(url, data, isJson = true) {
-            console.log("Enviant request a:", url);
             const options = { method: 'POST' };
             if (isJson) {
                 options.headers = { 'Content-Type': 'application/json' };
@@ -309,11 +303,8 @@
             }
         }
 
-        // --- HANDLERS ---
-
         async function handleP1(e, endpoint, resId) {
             e.preventDefault();
-            console.log("Calculant color...");
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData.entries());
             for (let key in data) data[key] = Number(data[key]);
@@ -322,7 +313,6 @@
 
         async function handleP1List(e, endpoint, resId) {
             e.preventDefault();
-            console.log("Fent RLE...");
             const raw = document.getElementById('rleInput').value;
             const data = { data: raw.split(',').map(Number) };
             await sendJsonP1(endpoint, data, resId);
@@ -330,7 +320,6 @@
 
         async function handleP1Matrix(endpoint, resId) {
             try {
-                console.log("Processant matriu...");
                 const raw = document.getElementById('matrixInput').value;
                 const matrix = JSON.parse(raw);
                 await sendJsonP1(endpoint, { matrix: matrix }, resId);
@@ -357,7 +346,6 @@
 
         function toggleS2Fields() {
             const op = document.getElementById('s2-op').value;
-            console.log("Canvi d'opció S2:", op);
             document.getElementById('inp-dims').classList.add('hidden');
             document.getElementById('inp-chroma').classList.add('hidden');
             if (op === 'resize_video' || op === 'resize_image') {
@@ -379,11 +367,11 @@
             let url = "";
             switch(op) {
                 case 'info': url = "/video/info"; break;
-                case 'resize_video': 
-                    url = `/video/resize?width=${document.getElementById('s2-w').value}&height=${document.getElementById('s2-h').value}`; 
+                case 'resize_video': 
+                    url = `/video/resize?width=${document.getElementById('s2-w').value}&height=${document.getElementById('s2-h').value}`; 
                     break;
                 case 'resize_image':
-                    url = `/image/resize?width=${document.getElementById('s2-w').value}&height=${document.getElementById('s2-h').value}`; 
+                    url = `/image/resize?width=${document.getElementById('s2-w').value}&height=${document.getElementById('s2-h').value}`; 
                     break;
                 case 'chroma':
                     url = `/video/chroma-subsampling?subsampling=${document.getElementById('s2-chroma-val').value}`;
@@ -394,7 +382,6 @@
                 case 'motion': url = "/video/motion-vectors"; break;
                 case 'hist': url = "/video/yuv-histogram"; break;
             }
-
 
             document.getElementById('s2-spinner').classList.remove('hidden');
             document.getElementById('s2-result-area').classList.add('hidden');
@@ -421,7 +408,6 @@
                 }
                 document.getElementById('s2-result-area').classList.remove('hidden');
             } catch (err) {
-                console.error(err);
                 alert("Error: " + err.message);
             } finally {
                 document.getElementById('s2-spinner').classList.add('hidden');
@@ -441,7 +427,6 @@
             const btn = e.target.querySelector('button');
             const originalText = btn.innerText;
             btn.innerText = "Processant... (Espera)";
-            console.log("Transcodificant a " + codec + "...");
             
             try {
                 const res = await fetch('/api/transcode', { method: 'POST', body: fd });
@@ -455,7 +440,6 @@
                 link.download = `video_${codec}.mkv`;
                 document.getElementById('p2-transcode-res').classList.remove('hidden');
             } catch(err) {
-                console.log(err);
                 alert(err.message);
             } finally {
                 btn.innerText = originalText;
@@ -472,7 +456,6 @@
 
             const btn = e.target.querySelector('button');
             btn.innerText = "Generant...";
-            console.log("Generant ladder...");
 
             try {
                 const res = await fetch('/api/ladder', { method: 'POST', body: fd });
@@ -484,7 +467,6 @@
                 container.innerHTML = "";
                 
                 if(json.download_links) {
-                    console.log("Links rebuts:", json.download_links);
                     json.download_links.forEach(link => {
                         const a = document.createElement('a');
                         a.href = link;
@@ -494,8 +476,6 @@
                         container.appendChild(a);
                     });
                     container.classList.remove('hidden');
-                } else {
-                    console.log("Resposta:", json);
                 }
             } catch(err) {
                 alert(err.message);
