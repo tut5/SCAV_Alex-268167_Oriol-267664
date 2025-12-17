@@ -309,7 +309,7 @@
             }
         }
 
-        // --- HANDLERS (Iguals que la versió que funcionava) ---
+        // --- HANDLERS ---
 
         async function handleP1(e, endpoint, resId) {
             e.preventDefault();
@@ -395,7 +395,6 @@
                 case 'hist': url = "/video/yuv-histogram"; break;
             }
 
-            console.log("Cridant API a: " + url); 
 
             document.getElementById('s2-spinner').classList.remove('hidden');
             document.getElementById('s2-result-area').classList.add('hidden');
