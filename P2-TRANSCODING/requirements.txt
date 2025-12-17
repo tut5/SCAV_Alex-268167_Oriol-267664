@@ -6,3 +6,4 @@ PyWavelets
 python-multipart
 requests
 docker
+jinja2

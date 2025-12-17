@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ca" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCAV Monster Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        /* Animacions suaus */
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Scrollbar maco */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 min-h-screen font-sans">
+
+    <nav class="bg-slate-800 border-b border-slate-700 p-4 sticky top-0 z-50 shadow-2xl">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-dragon text-3xl text-indigo-500"></i>
+                <div>
+                    <h1 class="text-xl font-bold text-white tracking-wide">SCAV MONSTER HUB</h1>
+                    <p class="text-xs text-slate-400">Integració P1 + S2 + P2</p>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <span class="px-3 py-1 bg-indigo-900/50 text-indigo-300 text-xs rounded-full border border-indigo-700">API v3.0</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+
+        <div class="grid grid-cols-3 gap-4 mb-8">
+            <button onclick="switchTab('p1')" id="btn-p1" class="tab-btn p-4 rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-transparent transition-all duration-200 flex flex-col items-center group">
+                <i class="fas fa-calculator text-2xl mb-2 text-cyan-400 group-hover:scale-110 transition"></i>
+                <span class="font-bold">Pràctica 1</span>
+                <span class="text-xs text-slate-500">Bàsics (Color, RLE, DCT)</span>
+            </button>
+            <button onclick="switchTab('s2')" id="btn-s2" class="tab-btn p-4 rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-transparent transition-all duration-200 flex flex-col items-center group">
+                <i class="fas fa-photo-video text-2xl mb-2 text-pink-400 group-hover:scale-110 transition"></i>
+                <span class="font-bold">Seminari 2</span>
+                <span class="text-xs text-slate-500">Processament Vídeo/Imatge</span>
+            </button>
+            <button onclick="switchTab('p2')" id="btn-p2" class="tab-btn p-4 rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-transparent transition-all duration-200 flex flex-col items-center group">
+                <i class="fas fa-server text-2xl mb-2 text-emerald-400 group-hover:scale-110 transition"></i>
+                <span class="font-bold">Pràctica 2</span>
+                <span class="text-xs text-slate-500">Transcodificació i Ladder</span>
+            </button>
+        </div>
+
+        <div id="tab-p1" class="tab-content hidden fade-in space-y-6">
+            <h2 class="text-2xl font-bold text-cyan-400 mb-4 border-b border-slate-700 pb-2">Eines Matemàtiques</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                    <h3 class="font-bold text-lg mb-4 text-white"><i class="fas fa-palette mr-2"></i>Conversor de Color</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <form onsubmit="handleP1(event, '/converter/rgb-to-yuv', 'rgbRes')" class="space-y-2">
+                            <p class="text-sm text-slate-400">RGB a YUV</p>
+                            <input type="number" placeholder="R" name="r" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-sm" required>
+                            <input type="number" placeholder="G" name="g" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-sm" required>
+                            <input type="number" placeholder="B" name="b" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-sm" required>
+                            <button class="w-full bg-cyan-600 hover:bg-cyan-500 text-white p-2 rounded text-sm">Convertir</button>
+                        </form>
+                        <div id="rgbRes" class="bg-slate-900 p-2 rounded text-xs font-mono text-green-400 overflow-auto">Resultat...</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                    <h3 class="font-bold text-lg mb-4 text-white"><i class="fas fa-compress-arrows-alt mr-2"></i>Run-Length Encoding</h3>
+                    <form onsubmit="handleP1List(event, '/converter/rle', 'rleRes')" class="space-y-3">
+                        <input type="text" id="rleInput" placeholder="Ex: 1,1,1,2,2,3" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-sm">
+                        <button class="w-full bg-cyan-600 hover:bg-cyan-500 text-white p-2 rounded text-sm">Comprimir (RLE)</button>
+                    </form>
+                    <div id="rleRes" class="mt-4 bg-slate-900 p-2 rounded text-xs font-mono text-green-400 overflow-auto">Resultat...</div>
+                </div>
+
+                <div class="bg-slate-800 p-6 rounded-lg border border-slate-700 md:col-span-2">
+                    <h3 class="font-bold text-lg mb-4 text-white"><i class="fas fa-th mr-2"></i>Operacions Matriu (DCT / Serpentina)</h3>
+                    <div class="flex gap-4">
+                        <div class="flex-1">
+                            <textarea id="matrixInput" rows="5" class="w-full bg-slate-900 border border-slate-600 rounded p-2 font-mono text-sm" placeholder="[[1, 2, 3], [4, 5, 6], [7, 8, 9]]"></textarea>
+                        </div>
+                        <div class="flex-1 space-y-2">
+                            <button onclick="handleP1Matrix('/scanner/serpentine', 'matRes')" class="w-full bg-slate-700 hover:bg-slate-600 p-2 rounded text-sm text-left"><i class="fas fa-wave-square mr-2"></i>Escàner Serpentina</button>
+                            <button onclick="handleP1Matrix('/converter/dct/forward', 'matRes')" class="w-full bg-slate-700 hover:bg-slate-600 p-2 rounded text-sm text-left"><i class="fas fa-arrow-right mr-2"></i>DCT Forward</button>
+                            <button onclick="handleP1Matrix('/converter/dct/inverse', 'matRes')" class="w-full bg-slate-700 hover:bg-slate-600 p-2 rounded text-sm text-left"><i class="fas fa-arrow-left mr-2"></i>DCT Inverse</button>
+                        </div>
+                    </div>
+                    <div id="matRes" class="mt-4 bg-slate-900 p-2 rounded text-xs font-mono text-green-400 overflow-auto max-h-40">Resultat matriu...</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-s2" class="tab-content hidden fade-in">
+            <h2 class="text-2xl font-bold text-pink-400 mb-4 border-b border-slate-700 pb-2">Processador de Mitjans</h2>
+            
+            <div class="bg-slate-800 rounded-xl shadow-xl overflow-hidden border border-slate-700">
+                <div class="p-8">
+                    <div class="border-2 border-dashed border-slate-600 rounded-lg p-6 text-center hover:border-pink-500 transition cursor-pointer relative mb-6">
+                        <input type="file" id="s2-file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="updateFileName(this, 's2-filename')">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-slate-500 mb-2"></i>
+                        <p class="text-slate-400">1. Selecciona el teu fitxer (Imatge o Vídeo)</p>
+                        <p id="s2-filename" class="text-sm text-pink-400 mt-2 font-mono"></p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm text-slate-400 mb-2">2. Tria Operació</label>
+                            <select id="s2-op" onchange="updateS2Inputs()" class="w-full bg-slate-900 border border-slate-600 rounded p-3 text-white">
+                                <option value="info">Obtenir Info (Metadades)</option>
+                                <option value="resize_video">Redimensionar Vídeo</option>
+                                <option value="resize_image">Redimensionar Imatge</option>
+                                <option value="chroma">Submostreig de Croma</option>
+                                <option value="bw">Imatge en Blanc i Negre</option>
+                                <option value="bbb">Crear Contenidor BBB</option>
+                                <option value="tracks">Comptar Pistes (Tracks)</option>
+                                <option value="motion">Veure Vectors de Moviment</option>
+                                <option value="hist">Veure Histograma YUV</option>
+                            </select>
+                        </div>
+
+                        <div id="s2-extras" class="space-y-4">
+                            <div id="inp-dims" class="hidden grid grid-cols-2 gap-2">
+                                <input type="number" id="s2-w" placeholder="Amplada (px)" class="bg-slate-900 border border-slate-600 rounded p-3">
+                                <input type="number" id="s2-h" placeholder="Alçada (px)" class="bg-slate-900 border border-slate-600 rounded p-3">
+                            </div>
+                            <div id="inp-chroma" class="hidden">
+                                <select id="s2-chroma-val" class="w-full bg-slate-900 border border-slate-600 rounded p-3">
+                                    <option value="yuv420p">YUV 4:2:0</option>
+                                    <option value="yuv422p">YUV 4:2:2</option>
+                                    <option value="yuv444p">YUV 4:4:4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="runS2()" class="w-full mt-6 bg-pink-600 hover:bg-pink-500 py-3 rounded-lg font-bold shadow-lg transition flex justify-center items-center">
+                        <span id="s2-btn-text">EXECUTAR PROCÉS</span>
+                        <i id="s2-spinner" class="fas fa-circle-notch fa-spin ml-2 hidden"></i>
+                    </button>
+                </div>
+
+                <div id="s2-result-area" class="hidden bg-slate-900 p-6 border-t border-slate-700">
+                    <h3 class="text-white font-bold mb-2">Resultat:</h3>
+                    
+                    <pre id="s2-json" class="hidden text-xs text-green-400 font-mono overflow-auto max-h-60 bg-black/50 p-4 rounded"></pre>
+                    
+                    <div id="s2-file-res" class="hidden text-center">
+                        <p class="text-slate-400 mb-2">Fitxer generat amb èxit</p>
+                        <a id="s2-download" href="#" class="inline-block bg-green-600 hover:bg-green-500 text-white px-6 py-2 rounded font-bold transition">
+                            <i class="fas fa-download mr-2"></i> Descarregar / Veure
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-p2" class="tab-content hidden fade-in">
+            <h2 class="text-2xl font-bold text-emerald-400 mb-4 border-b border-slate-700 pb-2">Monster Transcoder</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+                    <h3 class="text-xl font-bold text-white mb-4"><i class="fas fa-random mr-2"></i>Conversor de Còdecs</h3>
+                    <form id="transcodeForm" class="space-y-4">
+                        <input type="file" id="p2-file" class="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-emerald-900 file:text-emerald-400 hover:file:bg-emerald-800">
+                        
+                        <div class="grid grid-cols-2 gap-2">
+                            <label class="cursor-pointer bg-slate-700 p-3 rounded text-center hover:bg-emerald-900 has-[:checked]:bg-emerald-600 has-[:checked]:text-white transition">
+                                <input type="radio" name="codec" value="vp8" checked class="hidden"> VP8
+                            </label>
+                            <label class="cursor-pointer bg-slate-700 p-3 rounded text-center hover:bg-emerald-900 has-[:checked]:bg-emerald-600 has-[:checked]:text-white transition">
+                                <input type="radio" name="codec" value="vp9" class="hidden"> VP9
+                            </label>
+                            <label class="cursor-pointer bg-slate-700 p-3 rounded text-center hover:bg-emerald-900 has-[:checked]:bg-emerald-600 has-[:checked]:text-white transition">
+                                <input type="radio" name="codec" value="h265" class="hidden"> H.265
+                            </label>
+                            <label class="cursor-pointer bg-slate-700 p-3 rounded text-center hover:bg-emerald-900 has-[:checked]:bg-emerald-600 has-[:checked]:text-white transition">
+                                <input type="radio" name="codec" value="av1" class="hidden"> AV1
+                            </label>
+                        </div>
+
+                        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 py-3 rounded font-bold transition">Transcodificar</button>
+                    </form>
+                    <div id="p2-transcode-res" class="hidden mt-4 text-center">
+                        <a id="p2-dl-link" href="#" class="text-emerald-400 underline font-bold">Descarregar Resultat</a>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+                    <h3 class="text-xl font-bold text-white mb-4"><i class="fas fa-layer-group mr-2"></i>Encoding Ladder</h3>
+                    <p class="text-sm text-slate-400 mb-4">Genera versions en 1080p, 720p i 480p automàticament.</p>
+                    
+                    <form id="ladderForm">
+                        <input type="file" id="p2-ladder-file" class="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-emerald-900 file:text-emerald-400 hover:file:bg-emerald-800 mb-4">
+                        <button type="submit" class="w-full bg-slate-600 hover:bg-slate-500 py-3 rounded font-bold transition">Generar Ladder</button>
+                    </form>
+
+                    <div id="p2-ladder-res" class="hidden mt-4 space-y-2">
+                        </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- NAVEGACIÓ ---
+        function switchTab(id) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('border-white', 'bg-slate-700'));
+            
+            document.getElementById(`tab-${id}`).classList.remove('hidden');
+            const btn = document.getElementById(`btn-${id}`);
+            
+            // Colors per tab
+            if(id === 'p1') btn.classList.add('border-cyan-500', 'bg-slate-700');
+            if(id === 's2') btn.classList.add('border-pink-500', 'bg-slate-700');
+            if(id === 'p2') btn.classList.add('border-emerald-500', 'bg-slate-700');
+        }
+
+        // Init
+        switchTab('p1');
+
+        function updateFileName(input, targetId) {
+            if(input.files[0]) document.getElementById(targetId).textContent = input.files[0].name;
+        }
+
+        // --- LÒGICA P1 (Bàsics) ---
+        async function handleP1(e, endpoint, resId) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Convert strings to numbers
+            for (let key in data) data[key] = Number(data[key]);
+
+            await sendJsonP1(endpoint, data, resId);
+        }
+
+        async function handleP1List(e, endpoint, resId) {
+            e.preventDefault();
+            const raw = document.getElementById('rleInput').value;
+            const data = { data: raw.split(',').map(Number) };
+            await sendJsonP1(endpoint, data, resId);
+        }
+
+        async function handleP1Matrix(endpoint, resId) {
+            try {
+                const raw = document.getElementById('matrixInput').value;
+                const matrix = JSON.parse(raw);
+                await sendJsonP1(endpoint, { matrix: matrix }, resId);
+            } catch(err) {
+                document.getElementById(resId).innerText = "Error JSON: " + err.message;
+            }
+        }
+
+        async function sendJsonP1(endpoint, payload, resId) {
+            const el = document.getElementById(resId);
+            el.innerText = "Calculant...";
+            try {
+                const res = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const json = await res.json();
+                el.innerText = JSON.stringify(json, null, 2);
+            } catch(err) {
+                el.innerText = "Error: " + err.message;
+            }
+        }
+
+        // --- LÒGICA S2 (The Monster) ---
+        function updateS2Inputs() {
+            const op = document.getElementById('s2-op').value;
+            document.getElementById('inp-dims').classList.add('hidden');
+            document.getElementById('inp-chroma').classList.add('hidden');
+
+            if (op === 'resize_video' || op === 'resize_image') {
+                document.getElementById('inp-dims').classList.remove('hidden');
+            }
+            if (op === 'chroma') {
+                document.getElementById('inp-chroma').classList.remove('hidden');
+            }
+        }
+
+        async function runS2() {
+            const fileInput = document.getElementById('s2-file');
+            if (!fileInput.files[0]) return alert("Selecciona un fitxer");
+
+            const op = document.getElementById('s2-op').value;
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            let url = "";
+            
+            // Mapping selection to Endpoints
+            switch(op) {
+                case 'info': url = "/video/info"; break;
+                case 'resize_video': 
+                    url = `/video/resize?width=${document.getElementById('s2-w').value}&height=${document.getElementById('s2-h').value}`; 
+                    break;
+                case 'resize_image':
+                    url = `/image/resize?width=${document.getElementById('s2-w').value}&height=${document.getElementById('s2-h').value}`; 
+                    break;
+                case 'chroma':
+                    url = `/video/chroma-subsampling?subsampling=${document.getElementById('s2-chroma-val').value}`;
+                    break;
+                case 'bw': url = "/image/compress-bw"; break;
+                case 'bbb': url = "/video/bbb-container"; break;
+                case 'tracks': url = "/video/count-tracks"; break;
+                case 'motion': url = "/video/motion-vectors"; break;
+                case 'hist': url = "/video/yuv-histogram"; break;
+            }
+
+            // UI Loading
+            document.getElementById('s2-spinner').classList.remove('hidden');
+            document.getElementById('s2-result-area').classList.add('hidden');
+            document.getElementById('s2-json').classList.add('hidden');
+            document.getElementById('s2-file-res').classList.add('hidden');
+
+            try {
+                const res = await fetch(url, { method: 'POST', body: formData });
+                
+                // Detectar si es archivo o JSON
+                const contentType = res.headers.get("content-type");
+                
+                if (contentType && contentType.indexOf("application/json") !== -1) {
+                    const json = await res.json();
+                    const pre = document.getElementById('s2-json');
+                    pre.textContent = JSON.stringify(json, null, 2);
+                    pre.classList.remove('hidden');
+                    
+                    // Si el JSON tiene 'output_location' también podemos intentar descargarlo
+                    if(json.output_location && !json.error) {
+                        // Opcional: mostrar botón si el JSON devuelve una ruta
+                    }
+
+                } else {
+                    // Es un Blob (Archivo)
+                    const blob = await res.blob();
+                    const dlUrl = window.URL.createObjectURL(blob);
+                    const link = document.getElementById('s2-download');
+                    link.href = dlUrl;
+                    link.download = "resultat_scav." + (blob.type.split('/')[1] || 'dat');
+                    document.getElementById('s2-file-res').classList.remove('hidden');
+                }
+                
+                document.getElementById('s2-result-area').classList.remove('hidden');
+
+            } catch (err) {
+                alert("Error: " + err.message);
+            } finally {
+                document.getElementById('s2-spinner').classList.add('hidden');
+            }
+        }
+
+        // --- LÒGICA P2 (Transcoding) ---
+        document.getElementById('transcodeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const file = document.getElementById('p2-file').files[0];
+            const codec = document.querySelector('input[name="codec"]:checked').value;
+            if(!file) return alert("Manca fitxer");
+
+            const fd = new FormData();
+            fd.append('file', file);
+            fd.append('codec', codec);
+            
+            // Loading simple con texto botón
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = "Processant...";
+            
+            try {
+                const res = await fetch('/api/transcode', { method: 'POST', body: fd });
+                if(!res.ok) throw new Error("Error transcodificant");
+                
+                const blob = await res.blob();
+                const url = window.URL.createObjectURL(blob);
+                
+                const link = document.getElementById('p2-dl-link');
+                link.href = url;
+                link.download = `video_${codec}.mkv`; // o detectar ext
+                document.getElementById('p2-transcode-res').classList.remove('hidden');
+            } catch(err) {
+                alert(err.message);
+            } finally {
+                btn.innerText = originalText;
+            }
+        });
+
+        document.getElementById('ladderForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const file = document.getElementById('p2-ladder-file').files[0];
+            if(!file) return alert("Manca fitxer");
+
+            const fd = new FormData();
+            fd.append('file', file);
+
+            const btn = e.target.querySelector('button');
+            btn.innerText = "Generant Ladder (paciència)...";
+
+            try {
+                const res = await fetch('/api/ladder', { method: 'POST', body: fd });
+                const json = await res.json();
+                
+                const container = document.getElementById('p2-ladder-res');
+                container.innerHTML = "";
+                
+                if(json.download_links) {
+                    json.download_links.forEach(link => {
+                        const a = document.createElement('a');
+                        a.href = link;
+                        a.className = "block bg-slate-700 p-2 rounded text-emerald-400 hover:bg-slate-600";
+                        a.innerText = "Descarregar: " + link.split('/').pop();
+                        a.target = "_blank";
+                        container.appendChild(a);
+                    });
+                    container.classList.remove('hidden');
+                }
+            } catch(err) {
+                alert(err.message);
+            } finally {
+                btn.innerText = "Generar Ladder";
+            }
+        });
+
+    </script>
+</body>
+</html>
