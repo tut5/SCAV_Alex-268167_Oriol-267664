@@ -426,7 +426,7 @@
             
             const btn = e.target.querySelector('button');
             const originalText = btn.innerText;
-            btn.innerText = "Processant... (Espera)";
+            btn.innerText = "Processant...";
             
             try {
                 const res = await fetch('/api/transcode', { method: 'POST', body: fd });
