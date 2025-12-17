@@ -28,7 +28,7 @@ Practice2/
 ## Nous Endpoints (API)
 
 Els nous endpoints que s’han creat han sigut els següents:
-
+![](./assets/enpoints.png)
 ---
 
 ## Task 1: Transcodificar el còdec d’un vídeo
