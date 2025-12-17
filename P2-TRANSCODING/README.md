@@ -171,7 +171,7 @@ docker-compose down
 docker-compose up --build
 ```
 
-3. **Accedir a la API** a través del navegador: [http://localhost:8000/docs](https://www.google.com/search?q=http://localhost:8000/docs). La nova secció **"P2 \- Transcoding"** conté tots els endpoints descrits. Per accedir a la GUI s'haura d'introduir la següent direcció [http://localhost:8000]
+3. **Accedir a la API** a través del navegador: [http://localhost:8000/docs](https://www.google.com/search?q=http://localhost:8000/docs). La nova secció **"P2 \- Transcoding"** conté tots els endpoints descrits. Per accedir a la GUI s'haura d'introduir la següent direcció [http://localhost:8000](https://www.google.com/search?q=http://localhost:8000)
 
 4. **Gestió de Fitxers:** Tots els vídeos processats es guardaran automàticament a la carpeta `shared_data` de la carpeta arrel amb el nom de sortida definit en cada cas. 
 
